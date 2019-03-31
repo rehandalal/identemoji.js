@@ -18,9 +18,7 @@ module.exports = {
     publicPath: "/",
     filename: "[name].js"
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
     contentBase: __dirname + "/previewer",
     disableHostCheck: true,
