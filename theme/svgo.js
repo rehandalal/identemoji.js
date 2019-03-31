@@ -103,7 +103,8 @@ function optimize(file) {
       throw err;
     }
 
-    for (let p = 0; p < 3; p++) {
+    // Do six passes for multipass optimizations
+    for (let p = 0; p < 6; p++) {
       await svgo.optimize(data, { path: fp }).then(function(output) {
         fs.writeFile(fp, output.data, function() {});
       });
