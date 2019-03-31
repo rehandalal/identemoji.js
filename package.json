@@ -5,7 +5,8 @@
   "license": "MPL-2.0",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --config ./webpack-server.config.js --mode development"
+    "start": "webpack-dev-server --config ./webpack-server.config.js --mode development",
+    "optimize-svg": "svgo theme/svg/*.svg -p 2 --pretty --disable={cleanupNumericValues} --enable={removeRasterImages,sortAttrs,removeStyleElement,removeScriptElement} --multipass"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
