@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack-dev-server --config ./webpack-server.config.js --mode development",
-    "optimize-svg": "svgo theme/svg/*.svg --config=./theme/svgo.config.js -p 2 --disable={cleanupNumericValues} --enable={removeRasterImages,sortAttrs,removeStyleElement,removeScriptElement} --multipass"
+    "optimize-svg": "./theme/svgo.js .theme/svg/*.svg"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
