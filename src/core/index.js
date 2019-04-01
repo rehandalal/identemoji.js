@@ -1,6 +1,6 @@
 import svgToTinyDataUri from "mini-svg-data-uri";
 
-import { getHash, getImageFromSVGString } from "./utils";
+import { getHash } from "./utils";
 
 export default class Identemoji {
   constructor(seed, theme, size = 96) {
