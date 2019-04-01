@@ -28,9 +28,9 @@ module.exports = (env, argv) => ({
     ]
   },
   output: {
-    path: __dirname + "/dist",
+    path: __dirname + "/dist/previewer",
     publicPath: argv.mode === "production" ? "./" : "/",
-    filename: "[name]/[name].js"
+    filename: "[name].js"
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
