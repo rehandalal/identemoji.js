@@ -29,7 +29,7 @@ module.exports = {
   },
   output: {
     path: __dirname + "/previewer/dist",
-    publicPath: "/",
+    publicPath: "./",
     filename: "[name].js"
   },
   plugins: [
