@@ -3,9 +3,7 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const isProduction = process.env.NODE_ENV === "production";
-
-module.exports = {
+module.exports = (env, argv) => ({
   entry: {
     main: [
       __dirname + "/previewer/previewer.js",
@@ -31,7 +29,7 @@ module.exports = {
   },
   output: {
     path: __dirname + "/previewer/dist",
-    publicPath: isProduction ? "./" : "/",
+    publicPath: argv.mode === "production" ? "./" : "/",
     filename: "[name].js"
   },
   plugins: [
@@ -53,4 +51,4 @@ module.exports = {
     host: "0.0.0.0",
     historyApiFallback: true
   }
-};
+});
