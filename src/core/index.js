@@ -34,10 +34,10 @@ export default class Identemoji {
 
       case 2:
         ctx.fillStyle = color1;
-        ctx.fillRect(0, 0, s, size / 2);
+        ctx.fillRect(0, 0, size, size / 2);
 
         ctx.fillStyle = color2;
-        ctx.fillRect(0, size / 2, s, size / 2);
+        ctx.fillRect(0, size / 2, size, size / 2);
         break;
 
       case 1:
@@ -50,7 +50,7 @@ export default class Identemoji {
 
       case 0:
         ctx.fillStyle = color1;
-        ctx.fillRect(0, 0, s, size);
+        ctx.fillRect(0, 0, size, size);
         break;
     }
   }
@@ -62,9 +62,9 @@ export default class Identemoji {
 
     return new Promise(resolve => {
       const img = new Image();
-      img.onload = () => {
+      img.onload = function() {
         ctx.shadowColor = "rgba(0, 0, 0, 0.25)";
-        ctx.shadowBlur = s / 8;
+        ctx.shadowBlur = size / 8;
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
         ctx.drawImage(
