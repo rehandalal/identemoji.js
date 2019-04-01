@@ -5,6 +5,7 @@
   "license": "MPL-2.0",
   "scripts": {
     "build": "webpack --mode production",
+    "build:previewer": "webpack --mode production --config ./webpack-server.config.js",
     "start": "webpack-dev-server --config ./webpack-server.config.js --mode development",
     "optimize-svg": "./theme/svgo.js ./theme/svg/*.svg"
   },
