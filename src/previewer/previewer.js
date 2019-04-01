@@ -1,8 +1,7 @@
-import defaultTheme from "../theme";
+import Identemoji from "../core";
+import { getHash } from "../core/utils";
 
-import Identemoji from "../src";
-
-import { getHash } from "../src/utils";
+import defaultTheme from "../theme/default";
 
 const defaultSeed = "test";
 

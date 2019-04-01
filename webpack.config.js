@@ -2,7 +2,7 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: {
-    main: __dirname + "/src/index.js"
+    core: __dirname + "/src/core/index.js"
   },
   module: {
     rules: [
@@ -16,7 +16,7 @@ module.exports = {
   output: {
     path: __dirname + "/dist",
     publicPath: "/",
-    filename: "[name].js"
+    filename: "[name]/[name].js"
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {

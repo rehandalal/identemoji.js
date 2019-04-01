@@ -5,8 +5,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env, argv) => ({
   entry: {
-    main: [
-      __dirname + "/previewer/previewer.js",
+    previewer: [
+      __dirname + "/src/previewer/previewer.js",
       "milligram/dist/milligram.css"
     ]
   },
@@ -28,9 +28,9 @@ module.exports = (env, argv) => ({
     ]
   },
   output: {
-    path: __dirname + "/previewer/dist",
+    path: __dirname + "/dist",
     publicPath: argv.mode === "production" ? "./" : "/",
-    filename: "[name].js"
+    filename: "[name]/[name].js"
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -38,13 +38,13 @@ module.exports = (env, argv) => ({
       filename: "[name].css"
     }),
     new HtmlWebpackPlugin({
-      template: __dirname + "/previewer/index.html",
-      favicon: __dirname + "/previewer/favicon.png",
+      template: __dirname + "/src/previewer/index.html",
+      favicon: __dirname + "/src/previewer/favicon.png",
       inject: "body"
     })
   ],
   devServer: {
-    contentBase: __dirname + "/previewer/dist",
+    contentBase: __dirname + "/dist/previewer",
     disableHostCheck: true,
     hot: true,
     port: 3000,
