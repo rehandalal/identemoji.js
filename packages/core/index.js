@@ -16,40 +16,98 @@ export default class Identemoji {
 
   async drawBackground(ctx, hash) {
     const { size } = this;
-    const { colors } = this.theme;
-    const layout = parseInt(hash.substring(0, 2), 16) % 4;
-    const color1 = colors[parseInt(hash.substring(18, 20), 16) % colors.length];
-    const color2 = colors[parseInt(hash.substring(16, 18), 16) % colors.length];
+    const { colors, layouts = [...Array(8).keys()] } = this.theme;
+    const layout = layouts[parseInt(hash.substring(0, 2), 16) % layouts.length];
+
+    const color = [];
+    for (let i = 0; i < 3; i++) {
+      const key =
+        parseInt(hash.substring(18 - i * 2, 20 - i * 2), 16) % colors.length;
+      color[i] = colors[key];
+
+      if (color[i] === color[i - 1]) {
+        color[i] = colors[(key + 1) % colors.length];
+      }
+    }
 
     switch (layout) {
-      case 3:
-        ctx.fillStyle = color1;
-        ctx.fillRect(0, 0, size / 2, size / 2);
-        ctx.fillRect(size / 2, size / 2, size / 2, size / 2);
+      case 7:
+        ctx.fillStyle = color[0];
+        ctx.fillRect(0, 0, size, size);
 
-        ctx.fillStyle = color2;
+        ctx.fillStyle = color[1];
+        ctx.fillRect(0, size / 3, (size * 2) / 3, (size * 2) / 3);
+        ctx.fillRect(size / 3, 0, (size * 2) / 3, (size * 2) / 3);
+
+        ctx.fillStyle = color[2];
+        ctx.fillRect(0, (size * 2) / 3, size / 3, size / 3);
+        ctx.fillRect(size / 3, size / 3, size / 3, size / 3);
+        ctx.fillRect((size * 2) / 3, 0, size / 3, size / 3);
+        break;
+
+      case 6:
+        ctx.fillStyle = color[0];
+        ctx.fillRect(0, 0, size, size);
+
+        ctx.fillStyle = color[1];
+        ctx.fillRect(0, 0, (size * 2) / 3, (size * 2) / 3);
+        ctx.fillRect(size / 3, size / 3, (size * 2) / 3, (size * 2) / 3);
+
+        ctx.fillStyle = color[2];
+        ctx.fillRect(0, 0, size / 3, size / 3);
+        ctx.fillRect(size / 3, size / 3, size / 3, size / 3);
+        ctx.fillRect((size * 2) / 3, (size * 2) / 3, size / 3, size / 3);
+        break;
+
+      case 5:
+        ctx.fillStyle = color[1];
+        ctx.fillRect(0, 0, size, size);
+
+        ctx.fillStyle = color[0];
+        ctx.fillRect(0, 0, size / 3, size);
+
+        ctx.fillStyle = color[2];
+        ctx.fillRect((size * 2) / 3, 0, size / 3, size);
+        break;
+
+      case 4:
+        ctx.fillStyle = color[1];
+        ctx.fillRect(0, 0, size, size);
+
+        ctx.fillStyle = color[0];
+        ctx.fillRect(0, 0, size, size / 3);
+
+        ctx.fillStyle = color[2];
+        ctx.fillRect(0, (size * 2) / 3, size, size / 3);
+        break;
+
+      case 3:
+        ctx.fillStyle = color[0];
+        ctx.fillRect(0, 0, size, size);
+
+        ctx.fillStyle = color[1];
         ctx.fillRect(0, size / 2, size / 2, size / 2);
         ctx.fillRect(size / 2, 0, size / 2, size / 2);
         break;
 
       case 2:
-        ctx.fillStyle = color1;
-        ctx.fillRect(0, 0, size, size / 2);
+        ctx.fillStyle = color[0];
+        ctx.fillRect(0, 0, size, size);
 
-        ctx.fillStyle = color2;
+        ctx.fillStyle = color[1];
         ctx.fillRect(0, size / 2, size, size / 2);
         break;
 
       case 1:
-        ctx.fillStyle = color1;
-        ctx.fillRect(0, 0, size / 2, size);
+        ctx.fillStyle = color[0];
+        ctx.fillRect(0, 0, size, size);
 
-        ctx.fillStyle = color2;
+        ctx.fillStyle = color[1];
         ctx.fillRect(size / 2, 0, size / 2, size);
         break;
 
-      case 0:
-        ctx.fillStyle = color1;
+      default:
+        ctx.fillStyle = color[0];
         ctx.fillRect(0, 0, size, size);
         break;
     }
@@ -83,8 +141,13 @@ export default class Identemoji {
   async draw() {
     const hash = await getHash(this.seed);
     const ctx = this.canvas.getContext("2d");
-    await this.drawBackground(ctx, hash);
-    await this.drawEmoji(ctx, hash);
+    const { colors, emojis } = this.theme;
+    if (colors.length) {
+      await this.drawBackground(ctx, hash);
+    }
+    if (emojis.length) {
+      await this.drawEmoji(ctx, hash);
+    }
   }
 
   async toDataURL(type, encoderOptions) {
