@@ -3,14 +3,28 @@ import { getHash } from "../core/utils";
 
 import defaultTheme from "../theme/default";
 
-const defaultSeed = "test";
+const defaultSeed = "Identemoji";
 
 const seedField = document.getElementById("seed");
 const themeField = document.getElementById("theme");
 
-const handleChange = () => {
+const handleChange = async () => {
   const ie = new Identemoji(seedField.value, JSON.parse(themeField.value), 512);
   ie.draw();
+
+  const fi = new Identemoji(seedField.value, JSON.parse(themeField.value), 32);
+  await fi.draw();
+
+  let link = document.querySelector('link[rel*="icon"]');
+  if (link) {
+    link.remove();
+  }
+
+  link = document.createElement("link");
+  link.type = "image/png";
+  link.rel = "shortcut icon";
+  link.href = await fi.toDataURL();
+  document.getElementsByTagName("head")[0].appendChild(link);
 
   const pb = document.getElementById("preview-box");
   pb.innerHTML = "";

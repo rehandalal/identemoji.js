@@ -74,6 +74,7 @@ export default class Identemoji {
           (size * 5) / 8,
           (size * 5) / 8
         );
+        resolve();
       };
       img.src = svgToTinyDataUri(emoji);
     });
@@ -84,5 +85,9 @@ export default class Identemoji {
     const ctx = this.canvas.getContext("2d");
     await this.drawBackground(ctx, hash);
     await this.drawEmoji(ctx, hash);
+  }
+
+  async toDataURL(type, encoderOptions) {
+    return this.canvas.toDataURL(type, encoderOptions);
   }
 }

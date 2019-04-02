@@ -36,7 +36,6 @@ module.exports = (env, argv) => ({
     }),
     new HtmlWebpackPlugin({
       template: __dirname + "/index.html",
-      favicon: __dirname + "/favicon.png",
       inject: "body"
     })
   ],
