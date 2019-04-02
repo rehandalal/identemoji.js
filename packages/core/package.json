@@ -5,6 +5,8 @@
   "license": "MPL-2.0",
   "devDependencies": {},
   "dependencies": {
+    "color-space": "1.16.0",
+    "delta-e": "0.0.7",
     "mini-svg-data-uri": "1.0.3"
   }
 }
