@@ -1,0 +1,10 @@
+{
+  "license": "MPL-2.0",
+  "name": "@identemoji/previewer",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "milligram": "1.3.0"
+  },
+  "dependencies": {}
+}

@@ -1,33 +1,15 @@
 {
-  "name": "identemoji",
-  "description": "",
-  "version": "0.1.0",
   "license": "MPL-2.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "build": "webpack --mode production",
-    "build:previewer": "webpack --mode production --config ./webpack-server.config.js",
-    "start": "webpack-dev-server --config ./webpack-server.config.js --mode development",
+    "build:core": "webpack --mode production --config ./packages/core/webpack.config.js",
+    "build:previewer": "webpack --mode production --config ./packages/previewer/webpack.config.js",
+    "start:previewer": "webpack-dev-server --mode development --config ./packages/previewer/webpack.config.js",
     "optimize-svg": "./theme/svgo.js ./theme/svg/*.svg"
   },
-  "devDependencies": {
-    "@babel/core": "^7.4.0",
-    "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.5",
-    "css-loader": "^2.1.1",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.1.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "html-webpack-plugin": "^3.2.0",
-    "milligram": "^1.3.0",
-    "mini-css-extract-plugin": "^0.5.0",
-    "prettier": "^1.16.4",
-    "raw-loader": "^2.0.0",
-    "svgo": "^1.2.0",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.2.1"
-  },
-  "dependencies": {
-    "mini-svg-data-uri": "^1.0.3"
-  }
+  "devDependencies": {},
+  "dependencies": {}
 }

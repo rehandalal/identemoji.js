@@ -32,7 +32,7 @@ jobs:
             git config user.name "ci-build"
       - run:
           name: Deploy content to gh-pages branch
-          command: gh-pages --dist dist/previewer -m "Updates [ci skip]"
+          command: gh-pages --dist packages/previewer/dist -m "Updates [ci skip]"
 workflows:
   version: 2
   build:
