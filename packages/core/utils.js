@@ -1,5 +1,5 @@
 import * as rgb from "color-space/rgb";
-import * as lchab from "color-space/lchab";
+import * as lab from "color-space/lab";
 import * as xyz from "color-space/xyz";
 import deltaE from "delta-e";
 
@@ -23,6 +23,11 @@ export async function getHash(message) {
   return hexCodes.join("");
 }
 
+/**
+ * Returns an array with RGB values of the given hex color.
+ * @param hex  The hex value of the color.
+ * @returns {Array}  An array of R, G, B values.
+ */
 export function hex2RGB(hex) {
   let v = hex;
   if (v.startsWith("#")) {
@@ -30,9 +35,9 @@ export function hex2RGB(hex) {
   }
   if (v.length === 3) {
     return [
-      parseInt(v.substring(0, 1), 16),
-      parseInt(v.substring(1, 2), 16),
-      parseInt(v.substring(2, 3), 16)
+      parseInt(v.substring(0, 1).repeat(2), 16),
+      parseInt(v.substring(1, 2).repeat(2), 16),
+      parseInt(v.substring(2, 3).repeat(2), 16)
     ];
   }
   return [
@@ -42,20 +47,32 @@ export function hex2RGB(hex) {
   ];
 }
 
+/**
+ * Calculate the CIEDE2000 Delta E value between two colors.
+ * @param hex1  The hex value of the first color to compare.
+ * @param hex2  The hex value of the second color to compare.
+ * @returns {number}  The Delta E value.
+ */
 export function getDeltaE(hex1, hex2) {
-  const lab1 = xyz.lchab(rgb.xyz(hex2RGB(hex1)));
-  const lab2 = xyz.lchab(rgb.xyz(hex2RGB(hex2)));
+  const lab1 = xyz.lab(rgb.xyz(hex2RGB(hex1)));
+  const lab2 = xyz.lab(rgb.xyz(hex2RGB(hex2)));
   return deltaE.getDeltaE00(
     { L: lab1[0], A: lab1[1], B: lab1[2] },
     { L: lab2[0], A: lab2[1], B: lab2[2] }
   );
 }
 
+/**
+ * Gets the minimum Delta E value for a color compared to a group of colors.
+ * @param color
+ * @param compareColors
+ * @returns {*|number}
+ */
 export function getMinimumColorVariance(color, compareColors) {
   let v;
   for (let i = 0; i < compareColors.length; i++) {
     const cv = getDeltaE(color, compareColors[i]);
-    if (!v || cv < v) {
+    if (v === undefined || cv < v) {
       v = cv;
     }
   }

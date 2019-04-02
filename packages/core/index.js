@@ -8,7 +8,7 @@ export default class Identemoji {
     this.seed = seed;
     this.theme = {
       layouts: [...Array(10).keys()],
-      minColorVariance: 0,
+      minimumColorVariance: 0,
       ...theme
     };
 
@@ -20,7 +20,7 @@ export default class Identemoji {
 
   async drawBackground(ctx, hash) {
     const { size } = this;
-    const { colors, layouts, minColorVariance } = this.theme;
+    const { colors, layouts, minimumColorVariance } = this.theme;
     const layout = layouts[parseInt(hash.substring(0, 2), 16) % layouts.length];
 
     const color = [];
@@ -30,12 +30,12 @@ export default class Identemoji {
       color[i] = colors[key];
 
       if (color.length > 1) {
-        let offset = 1;
+        let offset = 0;
         while (
-          offset <= colors.length &&
-          getMCV(color[i], color.slice(0, i)) <= minColorVariance
+          offset < colors.length &&
+          getMCV(color[i], color.slice(0, i)) <= minimumColorVariance
         ) {
-          color[i] = colors[(key + offset) % colors.length];
+          color[i] = colors[(key + offset + 1) % colors.length];
           offset++;
         }
       }
