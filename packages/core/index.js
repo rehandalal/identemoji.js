@@ -1,6 +1,6 @@
 import svgToTinyDataUri from "mini-svg-data-uri";
 
-import { getDeltaE, getHash } from "./utils";
+import { getHash, getMinimumColorVariance as getMCV } from "./utils";
 
 export default class Identemoji {
   constructor(seed, theme, size = 96) {
@@ -29,11 +29,11 @@ export default class Identemoji {
         parseInt(hash.substring(18 - i * 2, 20 - i * 2), 16) % colors.length;
       color[i] = colors[key];
 
-      if (color[i - 1]) {
+      if (color.length > 1) {
         let offset = 1;
         while (
-          offset < colors.length &&
-          getDeltaE(color[i], color[i - 1]) <= minColorVariance
+          offset <= colors.length &&
+          getMCV(color[i], color.slice(0, i)) <= minColorVariance
         ) {
           color[i] = colors[(key + offset) % colors.length];
           offset++;

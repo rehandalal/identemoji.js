@@ -50,3 +50,14 @@ export function getDeltaE(hex1, hex2) {
     { L: lab2[0], A: lab2[1], B: lab2[2] }
   );
 }
+
+export function getMinimumColorVariance(color, compareColors) {
+  let v;
+  for (let i = 0; i < compareColors.length; i++) {
+    const cv = getDeltaE(color, compareColors[i]);
+    if (!v || cv < v) {
+      v = cv;
+    }
+  }
+  return v || 0;
+}
