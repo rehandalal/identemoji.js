@@ -31,6 +31,7 @@ html, body {
 
   > nav {
     flex-basis: 270px;
+    flex-shrink: 0;
     position: relative;
     z-index: 10;
   }
@@ -79,8 +80,25 @@ html, body {
       top: 0;
     }
 
-    .raw-editor {
+    .raw-editor,
+    .interactive-editor {
       margin-top: 2 * $pt-grid-size;
+    }
+
+    .interactive-editor {
+      .color-block {
+        background: #fff;
+        border: 1px solid $pt-divider-black;
+        border-radius: $pt-grid-size / 4;
+        display: inline-block;
+        margin: 0 $pt-grid-size $pt-grid-size 0;
+        padding: $pt-grid-size / 2;
+
+        > div {
+          height: 2 * $pt-grid-size;
+          width: 3 * $pt-grid-size;
+        }
+      }
     }
   }
 }

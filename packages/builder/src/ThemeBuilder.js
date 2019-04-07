@@ -66,6 +66,10 @@ class ThemeBuilder extends React.Component {
     this.setState({ editMode: "raw" });
   }
 
+  handleRawThemeChange(theme) {
+    this.setState({ theme: JSON.parse(theme) });
+  }
+
   renderIdenticonSettings() {
     return (
       <div className="identicon-settings">
@@ -83,10 +87,11 @@ class ThemeBuilder extends React.Component {
         </div>
 
         <Label>
-          Seed:
+          <h6 className={Classes.HEADING}>Seed:</h6>
           <InputGroup
             value={this.state.seed}
             onChange={this.handleSeedChange}
+            leftIcon="eye-open"
             rightElement={
               <Button onClick={this.randomizeSeed} minimal>
                 Random
@@ -95,7 +100,7 @@ class ThemeBuilder extends React.Component {
           />
         </Label>
 
-        <Label>Size:</Label>
+        <h6 className={Classes.HEADING}>Size:</h6>
         <RadioGroup
           onChange={this.handleSizeChange}
           selectedValue={this.state.size}
@@ -115,7 +120,22 @@ class ThemeBuilder extends React.Component {
   }
 
   renderInteractiveThemeSettings() {
-    return null;
+    return (
+      <div className="interactive-editor">
+        <h6 className={Classes.HEADING}>Colors:</h6>
+        {this.state.theme.colors.map((color, index) => {
+          return (
+            <div key={index} className="color-block">
+              <div
+                style={{
+                  backgroundColor: color
+                }}
+              />
+            </div>
+          );
+        })}
+      </div>
+    );
   }
 
   renderRawThemeSettings() {
@@ -128,6 +148,7 @@ class ThemeBuilder extends React.Component {
           height="26rem"
           width="100%"
           value={JSON.stringify(this.state.theme, null, 4)}
+          onChange={this.handleRawThemeChange}
           highlightActiveLine
         />
       </div>
@@ -137,16 +158,18 @@ class ThemeBuilder extends React.Component {
   renderThemeSettings() {
     return (
       <div className="theme-settings">
-        <h3 className={Classes.HEADING}>Theme Settings:</h3>
+        <h3 className={Classes.HEADING}>Theme Settings</h3>
         <ButtonGroup className="theme-settings-actions">
           <Button
             active={this.state.editMode === "interactive"}
+            icon="map"
             onClick={this.handleInteractiveModeClick}
           >
             Interactive
           </Button>
           <Button
             active={this.state.editMode === "raw"}
+            icon="code"
             onClick={this.handleRawModeClick}
           >
             Raw
