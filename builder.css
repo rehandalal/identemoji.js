@@ -7715,6 +7715,7 @@ html, body {
     background: #f5f8fa; }
   .container > nav {
     flex-basis: 270px;
+    flex-shrink: 0;
     position: relative;
     z-index: 10; }
   .container > main {
@@ -7751,6 +7752,17 @@ html, body {
       position: absolute;
       right: 0;
       top: 0; }
-    .builder .theme-settings .raw-editor {
+    .builder .theme-settings .raw-editor,
+    .builder .theme-settings .interactive-editor {
       margin-top: 20px; }
+    .builder .theme-settings .interactive-editor .color-block {
+      background: #fff;
+      border: 1px solid rgba(16, 22, 26, 0.15);
+      border-radius: 2.5px;
+      display: inline-block;
+      margin: 0 10px 10px 0;
+      padding: 5px; }
+      .builder .theme-settings .interactive-editor .color-block > div {
+        height: 20px;
+        width: 30px; }
 
