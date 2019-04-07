@@ -1,0 +1,64 @@
+@import "~@blueprintjs/core/lib/css/blueprint.css";
+@import "~@blueprintjs/core/lib/scss/variables";
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  max-width: 1100px;
+  min-height: 100vh;
+  position: relative;
+
+  &:before {
+    content: '';
+    height: 100%;
+    left: 50%;
+    position: absolute;
+    top: 0;
+    width: 50vw;
+  }
+
+  &:before,
+  > main {
+    background: $pt-app-background-color;
+  }
+
+  > nav {
+    flex-basis: 270px;
+    position: relative;
+    z-index: 10;
+  }
+
+  > main {
+    border-left: 1px solid $pt-divider-black;
+    flex-shrink: 1;
+    flex-grow: 1;
+    padding: $pt-grid-size * 4;
+    position:relative;
+    z-index: 10;
+  }
+}
+
+.identicon-settings {
+  padding-top: 2 * $pt-grid-size;
+  width: 234px;
+
+  .preview {
+    align-items: center;
+    background: #fff;
+    border: 1px solid $pt-divider-black;
+    border-radius: $pt-grid-size;
+    box-sizing: border-box;
+    display: flex;
+    height: 234px;
+    justify-content: center;
+    margin-bottom: $pt-grid-size * 2;
+    width: 234px;
+  }
+}

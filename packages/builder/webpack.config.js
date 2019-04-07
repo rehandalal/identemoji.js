@@ -5,18 +5,37 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env, argv) => ({
   entry: {
-    previewer: [__dirname + "/previewer.js", "milligram/dist/milligram.css"]
+    builder: __dirname + "/src/index.js"
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"]
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: [
+                ["@babel/preset-env", { useBuiltIns: "usage", corejs: 2 }],
+                "@babel/preset-react"
+              ],
+              plugins: [
+                ["@babel/plugin-proposal-decorators", { legacy: true }],
+                "@babel/plugin-proposal-class-properties"
+              ]
+            }
+          }
+        ]
       },
       {
         test: /\.s?css$/,
-        use: [{ loader: MiniCssExtractPlugin.loader }, "css-loader"]
+        use: [
+          "css-hot-loader",
+          { loader: MiniCssExtractPlugin.loader },
+          "css-loader",
+          "sass-loader"
+        ]
       },
       {
         test: /\.svg$/,
@@ -35,7 +54,7 @@ module.exports = (env, argv) => ({
       filename: "[name].css"
     }),
     new HtmlWebpackPlugin({
-      template: __dirname + "/index.html",
+      template: __dirname + "/public/index.html",
       inject: "body"
     })
   ],
