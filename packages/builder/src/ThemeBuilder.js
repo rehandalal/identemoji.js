@@ -1,12 +1,12 @@
 import autobind from "autobind-decorator";
 import React from "react";
 
-import AceEditor from "react-ace";
 import {
   Button,
   ButtonGroup,
   Classes,
   Divider,
+  Icon,
   InputGroup,
   Label,
   Radio,
@@ -16,6 +16,10 @@ import IdentemojiCore from "@identemoji/core";
 import { getHash } from "@identemoji/core/utils";
 import Identemoji from "@identemoji/react";
 import defaultTheme from "@identemoji/default-theme";
+import AceEditor from "react-ace";
+
+import ColorBlock from "./ColorBlock";
+import ColorPicker from "./ColorPicker";
 
 @autobind
 class ThemeBuilder extends React.Component {
@@ -74,6 +78,35 @@ class ThemeBuilder extends React.Component {
     this.setState({ theme: defaultTheme });
   }
 
+  handleDeleteColorClick(index) {
+    const { theme } = this.state;
+
+    this.setState({
+      theme: {
+        ...theme,
+        colors: [
+          ...theme.colors.slice(0, index),
+          ...theme.colors.slice(index + 1)
+        ]
+      }
+    });
+  }
+
+  handleColorChange(index, color) {
+    const { theme } = this.state;
+
+    this.setState({
+      theme: {
+        ...theme,
+        colors: [
+          ...theme.colors.slice(0, index),
+          color,
+          ...theme.colors.slice(index + 1)
+        ]
+      }
+    });
+  }
+
   renderIdenticonSettings() {
     return (
       <div className="identicon-settings">
@@ -129,13 +162,13 @@ class ThemeBuilder extends React.Component {
         <h6 className={Classes.HEADING}>Colors:</h6>
         {this.state.theme.colors.map((color, index) => {
           return (
-            <div key={index} className="color-block">
-              <div
-                style={{
-                  backgroundColor: color
-                }}
-              />
-            </div>
+            <ColorBlock
+              color={color}
+              index={index}
+              key={index}
+              onDelete={this.handleDeleteColorClick}
+              onChange={this.handleColorChange}
+            />
           );
         })}
       </div>
