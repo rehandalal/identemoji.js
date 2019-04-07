@@ -13,7 +13,7 @@ import {
 import IdentemojiCore from "@identemoji/core";
 import { getHash } from "@identemoji/core/utils";
 import Identemoji from "@identemoji/react";
-import defaultTheme from "@identemoji/theme/default";
+import defaultTheme from "@identemoji/default-theme";
 
 @autobind
 class App extends React.Component {

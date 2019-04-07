@@ -1,0 +1,8 @@
+{
+  "name": "@identemoji/default-theme",
+  "description": "Default theme for Identemoji.",
+  "version": "0.1.0",
+  "license": "MPL-2.0",
+  "devDependencies": {},
+  "dependencies": {}
+}
