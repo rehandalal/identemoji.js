@@ -45,20 +45,42 @@ html, body {
   }
 }
 
-.identicon-settings {
-  padding-top: 2 * $pt-grid-size;
-  width: 234px;
+.builder {
+  display: flex;
 
-  .preview {
-    align-items: center;
-    background: #fff;
-    border: 1px solid $pt-divider-black;
-    border-radius: $pt-grid-size;
-    box-sizing: border-box;
-    display: flex;
-    height: 234px;
-    justify-content: center;
-    margin-bottom: $pt-grid-size * 2;
-    width: 234px;
+  .identicon-settings {
+    margin-right: 2 * $pt-grid-size;
+    padding-top: 2 * $pt-grid-size;
+    flex-basis: 234px;
+
+    .preview {
+      align-items: center;
+      background: #fff;
+      border: 1px solid $pt-divider-black;
+      border-radius: $pt-grid-size;
+      box-sizing: border-box;
+      display: flex;
+      height: 234px;
+      justify-content: center;
+      margin-bottom: $pt-grid-size * 2;
+      width: 234px;
+    }
+  }
+
+  .theme-settings {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-top: 2 * $pt-grid-size;
+    position: relative;
+
+    .theme-settings-actions {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .raw-editor {
+      margin-top: 2 * $pt-grid-size;
+    }
   }
 }

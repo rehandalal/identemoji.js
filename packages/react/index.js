@@ -8,7 +8,10 @@ export default class IdentemojiComponent extends React.Component {
     onLoad: PropTypes.func,
     seed: PropTypes.string.isRequired,
     size: PropTypes.number,
-    theme: PropTypes.shape({}).isRequired
+    theme: PropTypes.shape({
+      colors: PropTypes.arrayOf(PropTypes.string).isRequired,
+      emojis: PropTypes.arrayOf(PropTypes.string).isRequired
+    }).isRequired
   };
 
   static defaultProps = {
