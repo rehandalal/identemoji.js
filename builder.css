@@ -7725,18 +7725,32 @@ html, body {
     position: relative;
     z-index: 10; }
 
-.identicon-settings {
-  padding-top: 20px;
-  width: 234px; }
-  .identicon-settings .preview {
-    align-items: center;
-    background: #fff;
-    border: 1px solid rgba(16, 22, 26, 0.15);
-    border-radius: 10px;
-    box-sizing: border-box;
-    display: flex;
-    height: 234px;
-    justify-content: center;
-    margin-bottom: 20px;
-    width: 234px; }
+.builder {
+  display: flex; }
+  .builder .identicon-settings {
+    margin-right: 20px;
+    padding-top: 20px;
+    flex-basis: 234px; }
+    .builder .identicon-settings .preview {
+      align-items: center;
+      background: #fff;
+      border: 1px solid rgba(16, 22, 26, 0.15);
+      border-radius: 10px;
+      box-sizing: border-box;
+      display: flex;
+      height: 234px;
+      justify-content: center;
+      margin-bottom: 20px;
+      width: 234px; }
+  .builder .theme-settings {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-top: 20px;
+    position: relative; }
+    .builder .theme-settings .theme-settings-actions {
+      position: absolute;
+      right: 0;
+      top: 0; }
+    .builder .theme-settings .raw-editor {
+      margin-top: 20px; }
 
