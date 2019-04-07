@@ -7726,6 +7726,13 @@ html, body {
     position: relative;
     z-index: 10; }
 
+.page {
+  position: relative; }
+  .page > .main-actions {
+    position: absolute;
+    right: 0;
+    top: 0; }
+
 .builder {
   display: flex; }
   .builder .identicon-settings {
