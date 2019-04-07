@@ -7709,12 +7709,13 @@ html, body {
     left: 50%;
     position: absolute;
     top: 0;
-    width: 50vw; }
+    width: 50vw;
+    z-index: -1; }
   .container:before,
   .container > main {
     background: #f5f8fa; }
   .container > nav {
-    flex-basis: 270px;
+    flex-basis: 240px;
     flex-shrink: 0;
     position: relative;
     z-index: 10; }
@@ -7761,15 +7762,39 @@ html, body {
       top: 0; }
     .builder .theme-settings .raw-editor,
     .builder .theme-settings .interactive-editor {
-      margin-top: 20px; }
-    .builder .theme-settings .interactive-editor .color-block {
-      background: #fff;
-      border: 1px solid rgba(16, 22, 26, 0.15);
-      border-radius: 2.5px;
-      display: inline-block;
-      margin: 0 10px 10px 0;
-      padding: 5px; }
-      .builder .theme-settings .interactive-editor .color-block > div {
-        height: 20px;
-        width: 30px; }
+      margin-top: 30px; }
+
+.color-block {
+  background: #fff;
+  border: 1px solid rgba(16, 22, 26, 0.15);
+  border-radius: 2.5px;
+  display: inline-block;
+  margin: 0 10px 10px 0;
+  padding: 5px;
+  position: relative;
+  z-index: 1; }
+  .color-block > .swatch {
+    cursor: pointer;
+    height: 20px;
+    width: 30px; }
+  .color-block > .delete-button {
+    align-items: center;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    height: 16px;
+    justify-content: center;
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    width: 16px; }
+    .color-block > .delete-button:hover {
+      background: rgba(0, 0, 0, 0.85); }
+  .color-block:hover > .delete-button {
+    display: flex; }
+
+.color-picker {
+  position: absolute;
+  z-index: 10; }
 
