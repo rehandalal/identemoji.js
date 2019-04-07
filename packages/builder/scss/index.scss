@@ -46,6 +46,16 @@ html, body {
   }
 }
 
+.page {
+  position: relative;
+
+  > .main-actions {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
 .builder {
   display: flex;
 

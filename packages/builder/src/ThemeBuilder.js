@@ -70,6 +70,10 @@ class ThemeBuilder extends React.Component {
     this.setState({ theme: JSON.parse(theme) });
   }
 
+  handleResetThemeClick() {
+    this.setState({ theme: defaultTheme });
+  }
+
   renderIdenticonSettings() {
     return (
       <div className="identicon-settings">
@@ -184,8 +188,17 @@ class ThemeBuilder extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div className="page">
         <h1 className={Classes.HEADING}>Theme Builder</h1>
+        <div className="main-actions">
+          <Button
+            icon="refresh"
+            intent="primary"
+            onClick={this.handleResetThemeClick}
+          >
+            Reset Theme
+          </Button>
+        </div>
 
         <Divider />
 
@@ -193,7 +206,7 @@ class ThemeBuilder extends React.Component {
           {this.renderIdenticonSettings()}
           {this.renderThemeSettings()}
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
