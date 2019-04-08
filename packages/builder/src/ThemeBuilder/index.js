@@ -6,7 +6,6 @@ import {
   ButtonGroup,
   Classes,
   Divider,
-  Icon,
   InputGroup,
   Label,
   Radio,
@@ -18,8 +17,7 @@ import Identemoji from "@identemoji/react";
 import defaultTheme from "@identemoji/default-theme";
 import AceEditor from "react-ace";
 
-import ColorBlock from "./ColorBlock";
-import ColorPicker from "./ColorPicker";
+import ColorSettings from "./ColorSettings";
 
 @autobind
 class ThemeBuilder extends React.Component {
@@ -78,42 +76,11 @@ class ThemeBuilder extends React.Component {
     this.setState({ theme: defaultTheme });
   }
 
-  handleDeleteColorClick(index) {
-    const { theme } = this.state;
-
+  handleColorUpdate(colors) {
     this.setState({
       theme: {
-        ...theme,
-        colors: [
-          ...theme.colors.slice(0, index),
-          ...theme.colors.slice(index + 1)
-        ]
-      }
-    });
-  }
-
-  handleColorChange(index, color) {
-    const { theme } = this.state;
-
-    this.setState({
-      theme: {
-        ...theme,
-        colors: [
-          ...theme.colors.slice(0, index),
-          color,
-          ...theme.colors.slice(index + 1)
-        ]
-      }
-    });
-  }
-
-  handleAddColorClick() {
-    const { theme } = this.state;
-
-    this.setState({
-      theme: {
-        ...theme,
-        colors: [...theme.colors, "#000000"]
+        ...this.state.theme,
+        colors
       }
     });
   }
@@ -168,25 +135,13 @@ class ThemeBuilder extends React.Component {
   }
 
   renderInteractiveThemeSettings() {
+    const { theme } = this.state;
     return (
       <div className="interactive-editor">
-        <h6 className={Classes.HEADING}>Colors:</h6>
-        {this.state.theme.colors.map((color, index) => {
-          return (
-            <ColorBlock
-              color={color}
-              index={index}
-              key={index}
-              onDelete={this.handleDeleteColorClick}
-              onChange={this.handleColorChange}
-            />
-          );
-        })}
-        <div className="color-block">
-          <div className="swatch" onClick={this.handleAddColorClick}>
-            <Icon icon="plus" />
-          </div>
-        </div>
+        <ColorSettings
+          colors={theme.colors}
+          onUpdate={this.handleColorUpdate}
+        />
       </div>
     );
   }
