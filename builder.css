@@ -7763,6 +7763,8 @@ html, body {
     .builder .theme-settings .raw-editor,
     .builder .theme-settings .interactive-editor {
       margin-top: 30px; }
+    .builder .theme-settings .color-settings {
+      margin-bottom: 10px; }
 
 .color-block {
   background: #fff;
@@ -7802,6 +7804,46 @@ html, body {
     .color-block > .delete-button svg {
       fill: #fff; }
   .color-block:hover > .delete-button {
+    display: flex; }
+
+.color-picker {
+  position: absolute;
+  z-index: 10; }
+
+.svg-block {
+  background: #fff;
+  border: 1px solid rgba(16, 22, 26, 0.15);
+  border-radius: 2.5px;
+  display: inline-block;
+  margin: 0 10px 10px 0;
+  padding: 5px;
+  position: relative;
+  vertical-align: top;
+  z-index: 1; }
+  .svg-block > img {
+    align-items: center;
+    cursor: pointer;
+    display: block;
+    height: 30px;
+    justify-content: center;
+    width: 30px; }
+  .svg-block > .delete-button {
+    align-items: center;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    height: 16px;
+    justify-content: center;
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    width: 16px; }
+    .svg-block > .delete-button:hover {
+      background: rgba(0, 0, 0, 0.85); }
+    .svg-block > .delete-button svg {
+      fill: #fff; }
+  .svg-block:hover > .delete-button {
     display: flex; }
 
 .color-picker {
