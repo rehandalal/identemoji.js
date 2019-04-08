@@ -9,7 +9,6 @@ import ColorPicker from "./ColorPicker";
 class ColorBlock extends React.Component {
   static propTypes = {
     color: PropTypes.string.isRequired,
-    index: PropTypes.number.isRequired,
     onChange: PropTypes.func,
     onDelete: PropTypes.func
   };

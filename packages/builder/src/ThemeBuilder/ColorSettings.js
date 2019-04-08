@@ -13,21 +13,21 @@ class ColorSettings extends React.Component {
     onUpdate: PropTypes.func
   };
 
-  handleDeleteColorClick(index) {
+  handleDelete(index) {
     const { colors, onUpdate } = this.props;
     if (onUpdate) {
       onUpdate([...colors.slice(0, index), ...colors.slice(index + 1)]);
     }
   }
 
-  handleColorChange(index, color) {
+  handleChange(index, color) {
     const { colors, onUpdate } = this.props;
     if (onUpdate) {
       onUpdate([...colors.slice(0, index), color, ...colors.slice(index + 1)]);
     }
   }
 
-  handleAddColorClick() {
+  handleAddClick() {
     const { colors, onUpdate } = this.props;
     if (onUpdate) {
       onUpdate([...colors, "#000000"]);
@@ -38,25 +38,23 @@ class ColorSettings extends React.Component {
     const { colors } = this.props;
 
     return (
-      <React.Fragment>
+      <div className="color-settings">
         <h6 className={Classes.HEADING}>Colors:</h6>
-        {colors.map((color, index) => {
-          return (
-            <ColorBlock
-              color={color}
-              index={index}
-              key={index}
-              onDelete={this.handleDeleteColorClick}
-              onChange={this.handleColorChange}
-            />
-          );
-        })}
+        {colors.map((color, index) => (
+          <ColorBlock
+            color={color}
+            index={index}
+            key={index}
+            onDelete={this.handleDelete}
+            onChange={this.handleChange}
+          />
+        ))}
         <div className="color-block">
-          <div className="swatch" onClick={this.handleAddColorClick}>
+          <div className="swatch" onClick={this.handleAddClick}>
             <Icon icon="plus" />
           </div>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }

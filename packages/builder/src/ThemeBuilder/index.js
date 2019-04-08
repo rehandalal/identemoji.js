@@ -18,6 +18,7 @@ import defaultTheme from "@identemoji/default-theme";
 import AceEditor from "react-ace";
 
 import ColorSettings from "./ColorSettings";
+import SVGBlock from "./SVGBlock";
 
 @autobind
 class ThemeBuilder extends React.Component {
@@ -85,6 +86,20 @@ class ThemeBuilder extends React.Component {
     });
   }
 
+  handleEmojiDeleteClick(index) {
+    const { theme } = this.state;
+
+    this.setState({
+      theme: {
+        ...theme,
+        emojis: [
+          ...theme.emojis.slice(0, index),
+          ...theme.emojis.slice(index + 1)
+        ]
+      }
+    });
+  }
+
   renderIdenticonSettings() {
     return (
       <div className="identicon-settings">
@@ -142,6 +157,15 @@ class ThemeBuilder extends React.Component {
           colors={theme.colors}
           onUpdate={this.handleColorUpdate}
         />
+
+        <h6 className={Classes.HEADING}>Emojis:</h6>
+        {theme.emojis.map((emoji, index) => (
+          <SVGBlock
+            svg={emoji}
+            index={index}
+            onDelete={this.handleEmojiDeleteClick}
+          />
+        ))}
       </div>
     );
   }
