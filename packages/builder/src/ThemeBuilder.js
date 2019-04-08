@@ -107,6 +107,17 @@ class ThemeBuilder extends React.Component {
     });
   }
 
+  handleAddColorClick() {
+    const { theme } = this.state;
+
+    this.setState({
+      theme: {
+        ...theme,
+        colors: [...theme.colors, "#000000"]
+      }
+    });
+  }
+
   renderIdenticonSettings() {
     return (
       <div className="identicon-settings">
@@ -171,6 +182,11 @@ class ThemeBuilder extends React.Component {
             />
           );
         })}
+        <div className="color-block">
+          <div className="swatch" onClick={this.handleAddColorClick}>
+            <Icon icon="plus" />
+          </div>
+        </div>
       </div>
     );
   }

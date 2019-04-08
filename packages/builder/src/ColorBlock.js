@@ -10,6 +10,7 @@ class ColorBlock extends React.Component {
   static propTypes = {
     color: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
+    onChange: PropTypes.func,
     onDelete: PropTypes.func
   };
 
@@ -35,18 +36,24 @@ class ColorBlock extends React.Component {
     onChange(index, color.hex);
   }
 
+  renderCloseButton() {
+    return (
+      <span className="delete-button" onClick={this.handleDeleteClick}>
+        <Icon icon="small-cross" />
+      </span>
+    );
+  }
+
   render() {
-    const { color } = this.props;
+    const { color, draggable } = this.props;
 
     return (
       <div className="color-block">
-        <span className="delete-button" onClick={this.handleDeleteClick}>
-          <Icon color="white" icon="small-cross" />
-        </span>
+        {this.renderCloseButton()}
         <div
           className="swatch"
           style={{
-            backgroundColor: color
+            backgroundColor: color || "transparent"
           }}
           onClick={this.handleClick}
         />

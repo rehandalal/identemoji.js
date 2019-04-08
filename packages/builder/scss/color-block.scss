@@ -6,12 +6,24 @@
   margin: 0 $pt-grid-size $pt-grid-size 0;
   padding: $pt-grid-size / 2;
   position: relative;
+  vertical-align: top;
   z-index: 1;
 
+  &[draggable] {
+    cursor: move;
+  }
+
   > .swatch {
+    align-items: center;
     cursor: pointer;
+    display: flex;
     height: 2 * $pt-grid-size;
+    justify-content: center;
     width: 3 * $pt-grid-size;
+
+    svg {
+      fill: $pt-text-color-muted;
+    }
   }
 
   > .delete-button {
@@ -29,6 +41,10 @@
 
     &:hover {
       background: rgba(0, 0, 0, 0.85);
+    }
+
+    svg {
+      fill: #fff;
     }
   }
 
