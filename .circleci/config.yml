@@ -224,9 +224,9 @@ jobs:
       - run:
           name: Publish packages
           command: |
-            yarn workspace @identemoji/core publish --non-interactive --new-version ${CIRCLE_TAG#"v"}
-            yarn workspace @identemoji/default-theme publish --non-interactive --new-version ${CIRCLE_TAG#"v"}
-            yarn workspace @identemoji/react publish --non-interactive --new-version ${CIRCLE_TAG#"v"}s
+            yarn workspace @identemoji/core publish --non-interactive --new-version ${CIRCLE_TAG#"v"} --access=public
+            yarn workspace @identemoji/default-theme publish --non-interactive --new-version ${CIRCLE_TAG#"v"} --access=public
+            yarn workspace @identemoji/react publish --non-interactive --new-version ${CIRCLE_TAG#"v"} --access=public
 
 workflows:
   version: 2
