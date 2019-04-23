@@ -10,7 +10,7 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: v1-python
+          key: lint-python
 
       - run:
           name: Create virtualenv
@@ -25,13 +25,13 @@ jobs:
       - save_cache:
           paths:
             - "~/venv"
-          key: v1-python
+          key: lint-python
 
       - restore_cache:
           keys:
-          - lint-js-dependencies-{{ checksum "yarn.lock" }}
+          - lint-yarn-packages-{{ checksum "yarn.lock" }}
           # fallback to using the latest cache if no exact match is found
-          - lint-js-dependencies-
+          - lint-yarn-packages-
 
       - run:
           name: Install node dependencies
@@ -40,7 +40,7 @@ jobs:
       - save_cache:
           paths:
             - "node_modules"
-          key: lint-js-dependencies-{{ checksum "yarn.lock" }}
+          key: lint-yarn-packages-{{ checksum "yarn.lock" }}
 
       # Run lint suite using therapist
       - run:
@@ -58,9 +58,9 @@ jobs:
 
       - restore_cache:
           keys:
-          - v2-dependencies-{{ checksum "yarn.lock" }}
+          - yarn-packages-{{ checksum "yarn.lock" }}
           # fallback to using the latest cache if no exact match is found
-          - v2-dependencies-
+          - yarn-packages-
 
       - run:
           name: Install node dependencies
@@ -69,7 +69,7 @@ jobs:
       - save_cache:
           paths:
             - "node_modules"
-          key: v2-dependencies-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
 
       - run:
           name: Build package
@@ -86,9 +86,9 @@ jobs:
 
       - restore_cache:
           keys:
-          - v2-dependencies-{{ checksum "yarn.lock" }}
+          - yarn-packages-{{ checksum "yarn.lock" }}
           # fallback to using the latest cache if no exact match is found
-          - v2-dependencies-
+          - yarn-packages-
 
       - run:
           name: Install node dependencies
@@ -97,11 +97,39 @@ jobs:
       - save_cache:
           paths:
             - "node_modules"
-          key: v2-dependencies-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
 
       - run:
           name: Build package
           command: yarn workspace @identemoji/default-theme build
+
+  build-builder:
+    docker:
+      - image: node:10.5
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - yarn-packages-{{ checksum "yarn.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - yarn-packages-
+
+      - run:
+          name: Install node dependencies
+          command: yarn install
+
+      - save_cache:
+          paths:
+            - "node_modules"
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Build package
+          command: yarn workspace @identemoji/builder build
 
   ghpages-build-deploy:
     docker:
@@ -118,9 +146,9 @@ jobs:
 
       - restore_cache:
           keys:
-          - v2-dependencies-{{ checksum "yarn.lock" }}
+          - yarn-packages-{{ checksum "yarn.lock" }}
           # fallback to using the latest cache if no exact match is found
-          - v2-dependencies-
+          - yarn-packages-
 
       - run:
           name: Install dependencies
@@ -129,7 +157,7 @@ jobs:
       - save_cache:
           paths:
             - "node_modules"
-          key: v2-dependencies-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
 
       - run:
           name: Build Theme Builder
@@ -153,6 +181,7 @@ workflows:
       - lint
       - build-core
       - build-default-theme
+      - build-builder
       - ghpages-build-deploy:
           filters:
             branches:
