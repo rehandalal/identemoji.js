@@ -224,9 +224,9 @@ jobs:
       - run:
           name: Publish packages
           command: |
-            yarn workspace @identemoji/core publish
-            yarn workspace @identemoji/default-theme publish
-            yarn workspace @identemoji/react publish
+            yarn workspace @identemoji/core publish --non-interactive
+            yarn workspace @identemoji/default-theme publish --non-interactive
+            yarn workspace @identemoji/react publish --non-interactive
 
 workflows:
   version: 2
