@@ -13,7 +13,7 @@ import {
   Tag
 } from "@blueprintjs/core";
 import IdentemojiCore from "@identemoji/core";
-import { getHash } from "@identemoji/core/utils";
+import { getHash } from "@identemoji/core/src/utils";
 import Identemoji from "@identemoji/react";
 import defaultTheme from "@identemoji/default-theme";
 import AceEditor from "react-ace";
@@ -165,11 +165,7 @@ class ThemeBuilder extends React.Component {
               Emojis:
               <Tag>{theme.emojis.length}</Tag>
             </h6>
-            <div className="meta">
-              <Button rightIcon="caret-down" small>
-                Bulk Actions
-              </Button>
-            </div>
+            <div className="meta" />
           </div>
           {theme.emojis.map((emoji, index) => (
             <SVGBlock

@@ -4,12 +4,6 @@
   "workspaces": [
     "packages/*"
   ],
-  "scripts": {
-    "build:core": "webpack --mode production --config ./packages/core/webpack.config.js",
-    "build:builder": "webpack --mode production --config ./packages/builder/webpack.config.js",
-    "start:builder": "webpack-dev-server --mode development --config ./packages/builder/webpack.config.js",
-    "optimize-svg": "./theme/svgo.js ./theme/svg/*.svg"
-  },
   "devDependencies": {},
   "dependencies": {}
 }
