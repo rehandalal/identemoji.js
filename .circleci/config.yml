@@ -23,7 +23,7 @@ jobs:
           key: v2-dependencies-{{ checksum "yarn.lock" }}
       - run:
           name: Build Theme Builder
-          command: yarn build:builder
+          command: yarn workspace @identemoji/builder build
       - run:
           name: Install gh-pages and configure
           command: |
