@@ -131,7 +131,12 @@ jobs:
           name: Build package
           command: yarn workspace @identemoji/builder build
 
-  ghpages-build-deploy:
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - packages/builder/dist
+
+  verify:
     docker:
       - image: node:10.5
 
@@ -139,6 +144,25 @@ jobs:
 
     steps:
       - checkout
+
+      - attach_workspace:
+          at: ~/deploy
+
+      - run:
+        name: List files
+        command: ls ~/deploy/packages/builder/dist
+
+  ghpages-deploy:
+    docker:
+      - image: node:10.5
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: ~/deploy
 
       - add_ssh_keys:
           fingerprints:
@@ -178,11 +202,33 @@ workflows:
   version: 2
   build:
     jobs:
-      - lint
-      - build-core
-      - build-default-theme
-      - build-builder
-      - ghpages-build-deploy:
+      # Lint
+      - lint:
+          filters:
+            tags:
+              only: /.*/
+
+      # Build
+      - build-core:
+          filters:
+            tags:
+              only: /.*/
+      - build-default-theme:
+          filters:
+            tags:
+              only: /.*/
+      - build-builder:
+          filters:
+            tags:
+              only: /.*/
+
+      # Deploy
+      - verify:
+          requires:
+            - build-builder
+      - ghpages-deploy:
+          requires:
+            - build-builder
           filters:
             branches:
               only: master
