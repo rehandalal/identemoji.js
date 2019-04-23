@@ -10,7 +10,7 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: v1-python
+          key: lint-python
 
       - run:
           name: Create virtualenv
@@ -25,13 +25,13 @@ jobs:
       - save_cache:
           paths:
             - "~/venv"
-          key: v1-python
+          key: lint-python
 
       - restore_cache:
           keys:
-          - lint-js-dependencies-{{ checksum "yarn.lock" }}
+          - lint-yarn-packages-{{ checksum "yarn.lock" }}
           # fallback to using the latest cache if no exact match is found
-          - lint-js-dependencies-
+          - lint-yarn-packages-
 
       - run:
           name: Install node dependencies
@@ -40,12 +40,25 @@ jobs:
       - save_cache:
           paths:
             - "node_modules"
-          key: lint-js-dependencies-{{ checksum "yarn.lock" }}
+          key: lint-yarn-packages-{{ checksum "yarn.lock" }}
 
       # Run lint suite using therapist
       - run:
           name: Lint
           command: therapist run --use-tracked-files
+
+  preflight:
+    docker:
+      - image: circleci/python:3.6-node-browsers
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - run:
+          name: Verify the tag
+          command: bin/verify-tag.py
 
   build-core:
     docker:
@@ -58,9 +71,9 @@ jobs:
 
       - restore_cache:
           keys:
-          - v2-dependencies-{{ checksum "yarn.lock" }}
+          - yarn-packages-{{ checksum "yarn.lock" }}
           # fallback to using the latest cache if no exact match is found
-          - v2-dependencies-
+          - yarn-packages-
 
       - run:
           name: Install node dependencies
@@ -69,11 +82,16 @@ jobs:
       - save_cache:
           paths:
             - "node_modules"
-          key: v2-dependencies-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
 
       - run:
           name: Build package
           command: yarn workspace @identemoji/core build
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - packages/core/dist
 
   build-default-theme:
     docker:
@@ -86,9 +104,9 @@ jobs:
 
       - restore_cache:
           keys:
-          - v2-dependencies-{{ checksum "yarn.lock" }}
+          - yarn-packages-{{ checksum "yarn.lock" }}
           # fallback to using the latest cache if no exact match is found
-          - v2-dependencies-
+          - yarn-packages-
 
       - run:
           name: Install node dependencies
@@ -97,13 +115,18 @@ jobs:
       - save_cache:
           paths:
             - "node_modules"
-          key: v2-dependencies-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
 
       - run:
           name: Build package
           command: yarn workspace @identemoji/default-theme build
 
-  ghpages-build-deploy:
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - packages/default-theme/dist
+
+  build-builder:
     docker:
       - image: node:10.5
 
@@ -112,15 +135,51 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          keys:
+          - yarn-packages-{{ checksum "yarn.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - yarn-packages-
+
+      - run:
+          name: Install node dependencies
+          command: yarn install
+
+      - save_cache:
+          paths:
+            - "node_modules"
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Build package
+          command: yarn workspace @identemoji/builder build
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - packages/builder/dist
+
+  deploy-ghpages:
+    docker:
+      - image: node:10.5
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: ~/repo
+
       - add_ssh_keys:
           fingerprints:
             - "4c:c3:e8:f5:1c:4e:07:7e:cf:8d:d8:6a:89:9e:bb:64"
 
       - restore_cache:
           keys:
-          - v2-dependencies-{{ checksum "yarn.lock" }}
+          - yarn-packages-{{ checksum "yarn.lock" }}
           # fallback to using the latest cache if no exact match is found
-          - v2-dependencies-
+          - yarn-packages-
 
       - run:
           name: Install dependencies
@@ -129,7 +188,7 @@ jobs:
       - save_cache:
           paths:
             - "node_modules"
-          key: v2-dependencies-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "yarn.lock" }}
 
       - run:
           name: Build Theme Builder
@@ -146,14 +205,75 @@ jobs:
           name: Deploy content to gh-pages branch
           command: gh-pages --dist packages/builder/dist -m "Updates [ci skip]"
 
+  publish:
+    docker:
+      - image: node:10.5
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: ~/repo
+
+      - run:
+          name: Configure Yarn
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+
+      - run:
+          name: Publish packages
+          command: |
+            yarn workspace @identemoji/core publish
+            yarn workspace @identemoji/default-theme publish
+            yarn workspace @identemoji/react publish
+
 workflows:
   version: 2
-  build:
+  test-build-deploy:
     jobs:
-      - lint
-      - build-core
-      - build-default-theme
-      - ghpages-build-deploy:
+      # Test
+      - lint:
+          filters:
+            tags:
+              only: /.*/
+
+      # Build
+      - build-core:
+          filters:
+            tags:
+              only: /.*/
+      - build-default-theme:
+          filters:
+            tags:
+              only: /.*/
+      - build-builder:
+          filters:
+            tags:
+              only: /.*/
+
+      # Deploy
+      - preflight:
+          requires:
+            - lint
+            - build-core
+            - build-default-theme
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - publish:
+          requires:
+            - preflight
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - deploy-ghpages:
+          requires:
+            - build-builder
           filters:
             branches:
               only: master
