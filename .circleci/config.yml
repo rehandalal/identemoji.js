@@ -29,9 +29,9 @@ jobs:
 
       - restore_cache:
           keys:
-          - v2-dependencies-{{ checksum "yarn.lock" }}
+          - lint-js-dependencies-{{ checksum "yarn.lock" }}
           # fallback to using the latest cache if no exact match is found
-          - v2-dependencies-
+          - lint-js-dependencies-
 
       - run:
           name: Install node dependencies
@@ -40,7 +40,7 @@ jobs:
       - save_cache:
           paths:
             - "node_modules"
-          key: v2-dependencies-{{ checksum "yarn.lock" }}
+          key: lint-js-dependencies-{{ checksum "yarn.lock" }}
 
       # Run lint suite using therapist
       - run:
