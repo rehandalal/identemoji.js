@@ -13,6 +13,11 @@ class GenerateThemeJSONPlugin {
         `${defaultThemeSrc}; defaultTheme.default`
       );
 
+      // Ensure the dist directory exists
+      if (!fs.existsSync("dist")) {
+        fs.mkdirSync("dist");
+      }
+
       // Save the object as JSON files
       fs.writeFile(
         "dist/default-theme.min.json",
