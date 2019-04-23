@@ -4,8 +4,7 @@
   "description": "Beautiful, theme-able identicons.",
   "version": "0.1.1",
   "scripts": {
-    "build": "webpack --mode production --config ./webpack.config.js",
-    "prepublishOnly": "yarn build"
+    "build": "webpack --mode production --config ./webpack.config.js"
   },
   "files": [
     "src/index.js",
