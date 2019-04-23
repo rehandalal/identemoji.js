@@ -1,42 +1,158 @@
 version: 2
 jobs:
-  ghpages-build-deploy:
+  lint:
     docker:
-      - image: node:10.5
+      - image: circleci/python:3.6-node-browsers
+
     working_directory: ~/repo
+
     steps:
       - checkout
-      - add_ssh_keys:
-          fingerprints:
-            - "4c:c3:e8:f5:1c:4e:07:7e:cf:8d:d8:6a:89:9e:bb:64"
+
+      - restore_cache:
+          key: v1-python
+
+      - run:
+          name: Create virtualenv
+          command: |
+            python3 -m venv ~/venv
+            echo "source ~/venv/bin/activate" >> $BASH_ENV
+
+      - run:
+          name: Install therapist
+          command: pip install -U therapist
+
+      - save_cache:
+          paths:
+            - "~/venv"
+          key: v1-python
+
       - restore_cache:
           keys:
           - v2-dependencies-{{ checksum "yarn.lock" }}
           # fallback to using the latest cache if no exact match is found
           - v2-dependencies-
+
       - run:
-          name: Install dependencies
-          command: yarn install --frozen-lockfile
+          name: Install node dependencies
+          command: yarn install
+
       - save_cache:
           paths:
             - "node_modules"
           key: v2-dependencies-{{ checksum "yarn.lock" }}
+
+      # Run lint suite using therapist
+      - run:
+          name: Lint
+          command: therapist run --use-tracked-files
+
+  build-core:
+    docker:
+      - image: node:10.5
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v2-dependencies-{{ checksum "yarn.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v2-dependencies-
+
+      - run:
+          name: Install node dependencies
+          command: yarn install
+
+      - save_cache:
+          paths:
+            - "node_modules"
+          key: v2-dependencies-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Build package
+          command: yarn workspace @identemoji/core build
+
+  build-default-theme:
+    docker:
+      - image: node:10.5
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v2-dependencies-{{ checksum "yarn.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v2-dependencies-
+
+      - run:
+          name: Install node dependencies
+          command: yarn install
+
+      - save_cache:
+          paths:
+            - "node_modules"
+          key: v2-dependencies-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Build package
+          command: yarn workspace @identemoji/default-theme build
+
+  ghpages-build-deploy:
+    docker:
+      - image: node:10.5
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - add_ssh_keys:
+          fingerprints:
+            - "4c:c3:e8:f5:1c:4e:07:7e:cf:8d:d8:6a:89:9e:bb:64"
+
+      - restore_cache:
+          keys:
+          - v2-dependencies-{{ checksum "yarn.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v2-dependencies-
+
+      - run:
+          name: Install dependencies
+          command: yarn install --frozen-lockfile
+
+      - save_cache:
+          paths:
+            - "node_modules"
+          key: v2-dependencies-{{ checksum "yarn.lock" }}
+
       - run:
           name: Build Theme Builder
           command: yarn workspace @identemoji/builder build
+
       - run:
           name: Install gh-pages and configure
           command: |
             yarn global add gh-pages
             git config user.email "ci-build@re.hn"
             git config user.name "ci-build"
+
       - run:
           name: Deploy content to gh-pages branch
           command: gh-pages --dist packages/builder/dist -m "Updates [ci skip]"
+
 workflows:
   version: 2
   build:
     jobs:
+      - lint
+      - build-core
+      - build-default-theme
       - ghpages-build-deploy:
           filters:
             branches:
