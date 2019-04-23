@@ -1,8 +1,18 @@
 {
+  "license": "MPL-2.0",
   "name": "@identemoji/core",
   "description": "Beautiful, theme-able identicons.",
-  "version": "0.1.0",
-  "license": "MPL-2.0",
+  "version": "0.1.1",
+  "scripts": {
+    "build": "webpack --mode production --config ./webpack.config.js",
+    "prepublishOnly": "yarn build"
+  },
+  "files": [
+    "src/index.js",
+    "src/utils.js",
+    "dist/identemoji-core.js"
+  ],
+  "main": "src/index.js",
   "devDependencies": {},
   "dependencies": {
     "color-space": "1.16.0",

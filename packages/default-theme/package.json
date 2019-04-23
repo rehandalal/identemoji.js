@@ -1,8 +1,22 @@
 {
+  "license": "MPL-2.0",
   "name": "@identemoji/default-theme",
   "description": "Default theme for Identemoji.",
-  "version": "0.1.0",
-  "license": "MPL-2.0",
+  "version": "0.1.1",
+  "scripts": {
+    "build": "webpack --mode production --config ./webpack.config.js",
+    "prepublishOnly": "yarn build"
+  },
+  "files": [
+    "data",
+    "svg",
+    "src/index.js",
+    "dist/default-theme.json",
+    "dist/default-theme.min.json",
+    "CREDITS.md"
+  ],
+  "main": "src/index.js",
+  "peerDependencies": {},
   "devDependencies": {},
   "dependencies": {}
 }

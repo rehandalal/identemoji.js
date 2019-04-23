@@ -93,8 +93,32 @@ html, body {
       margin-top: 3 * $pt-grid-size;
     }
 
-    .color-settings {
+    .settings-field {
       margin-bottom: $pt-grid-size;
+
+      .header {
+        display: flex;
+        justify-content: center;
+        margin-bottom: $pt-grid-size;
+
+        > h6 {
+          align-items: center;
+          display: inline-flex;
+          flex-grow: 1;
+          margin: 0;
+
+          .bp3-tag {
+            font-weight: normal;
+            margin-left: $pt-grid-size;
+          }
+        }
+
+        > .meta {
+          > * {
+            margin-left: $pt-grid-size;
+          }
+        }
+      }
     }
   }
 }

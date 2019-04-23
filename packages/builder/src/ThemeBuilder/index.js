@@ -9,7 +9,8 @@ import {
   InputGroup,
   Label,
   Radio,
-  RadioGroup
+  RadioGroup,
+  Tag
 } from "@blueprintjs/core";
 import IdentemojiCore from "@identemoji/core";
 import { getHash } from "@identemoji/core/utils";
@@ -158,14 +159,26 @@ class ThemeBuilder extends React.Component {
           onUpdate={this.handleColorUpdate}
         />
 
-        <h6 className={Classes.HEADING}>Emojis:</h6>
-        {theme.emojis.map((emoji, index) => (
-          <SVGBlock
-            svg={emoji}
-            index={index}
-            onDelete={this.handleEmojiDeleteClick}
-          />
-        ))}
+        <div className="settings-field">
+          <div className="header">
+            <h6 className={Classes.HEADING}>
+              Emojis:
+              <Tag>{theme.emojis.length}</Tag>
+            </h6>
+            <div className="meta">
+              <Button rightIcon="caret-down" small>
+                Bulk Actions
+              </Button>
+            </div>
+          </div>
+          {theme.emojis.map((emoji, index) => (
+            <SVGBlock
+              svg={emoji}
+              index={index}
+              onDelete={this.handleEmojiDeleteClick}
+            />
+          ))}
+        </div>
       </div>
     );
   }

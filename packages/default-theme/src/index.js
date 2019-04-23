@@ -1,4 +1,4 @@
-import colors from "./colors.json";
+import colors from "../data/colors.json";
 
 const theme = {
   colors,
@@ -11,6 +11,6 @@ function requireAll(r) {
     theme.emojis.push(r(k)["default"]);
   });
 }
-requireAll(require.context("./svg/", true, /\.svg$/));
+requireAll(require.context("../svg/", true, /\.svg$/));
 
 export default theme;

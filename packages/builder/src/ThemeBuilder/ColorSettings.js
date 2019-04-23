@@ -2,7 +2,7 @@ import autobind from "autobind-decorator";
 import PropTypes from "prop-types";
 import React from "react";
 
-import { Classes, Icon } from "@blueprintjs/core";
+import { Button, Classes, Icon, Tag } from "@blueprintjs/core";
 
 import ColorBlock from "./ColorBlock";
 
@@ -38,20 +38,32 @@ class ColorSettings extends React.Component {
     const { colors } = this.props;
 
     return (
-      <div className="color-settings">
-        <h6 className={Classes.HEADING}>Colors:</h6>
-        {colors.map((color, index) => (
-          <ColorBlock
-            color={color}
-            index={index}
-            key={index}
-            onDelete={this.handleDelete}
-            onChange={this.handleChange}
-          />
-        ))}
-        <div className="color-block">
-          <div className="swatch" onClick={this.handleAddClick}>
-            <Icon icon="plus" />
+      <div className="color-settings settings-field">
+        <div className="header">
+          <h6 className={Classes.HEADING}>
+            Colors:
+            <Tag>{colors.length}</Tag>
+          </h6>
+          <div className="meta">
+            <Button rightIcon="caret-down" small>
+              Bulk Actions
+            </Button>
+          </div>
+        </div>
+        <div className="collection">
+          {colors.map((color, index) => (
+            <ColorBlock
+              color={color}
+              index={index}
+              key={index}
+              onDelete={this.handleDelete}
+              onChange={this.handleChange}
+            />
+          ))}
+          <div className="color-block">
+            <div className="swatch" onClick={this.handleAddClick}>
+              <Icon icon="plus" />
+            </div>
           </div>
         </div>
       </div>
