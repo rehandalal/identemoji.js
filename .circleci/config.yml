@@ -146,11 +146,11 @@ jobs:
       - checkout
 
       - attach_workspace:
-          at: ~/deploy
+          at: ~/repo
 
       - run:
           name: List files
-          command: ls ~/deploy/packages/builder/dist
+          command: ls ~/repo/packages/builder/dist
 
   ghpages-deploy:
     docker:
@@ -162,7 +162,7 @@ jobs:
       - checkout
 
       - attach_workspace:
-          at: ~/deploy
+          at: ~/repo
 
       - add_ssh_keys:
           fingerprints:
