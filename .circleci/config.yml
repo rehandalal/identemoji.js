@@ -168,6 +168,9 @@ jobs:
     steps:
       - checkout
 
+      - attach_workspace:
+          at: ~/repo
+
       - restore_cache:
           keys:
           - yarn-packages-{{ checksum "yarn.lock" }}
@@ -293,6 +296,8 @@ workflows:
             tags:
               only: /.*/
       - build-builder:
+          requires:
+            - build-react
           filters:
             tags:
               only: /.*/
