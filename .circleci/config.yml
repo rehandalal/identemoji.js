@@ -47,6 +47,19 @@ jobs:
           name: Lint
           command: therapist run --use-tracked-files
 
+  verify-tag:
+    docker:
+      - image: circleci/python:3.6-node-browsers
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - run:
+          name: Verify the tag
+          command: bin/verify-tag.py
+
   build-core:
     docker:
       - image: node:10.5
@@ -136,23 +149,7 @@ jobs:
           paths:
             - packages/builder/dist
 
-  verify:
-    docker:
-      - image: node:10.5
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      - attach_workspace:
-          at: ~/repo
-
-      - run:
-          name: List files
-          command: ls ~/repo/packages/builder/dist
-
-  ghpages-deploy:
+  deploy-ghpages:
     docker:
       - image: node:10.5
 
@@ -223,10 +220,8 @@ workflows:
               only: /.*/
 
       # Deploy
-      - verify:
-          requires:
-            - build-builder
-      - ghpages-deploy:
+      - verify-tag
+      - deploy-ghpages:
           requires:
             - build-builder
           filters:
