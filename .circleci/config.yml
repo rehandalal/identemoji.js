@@ -47,7 +47,7 @@ jobs:
           name: Lint
           command: therapist run --use-tracked-files
 
-  verify-tag:
+  preflight:
     docker:
       - image: circleci/python:3.6-node-browsers
 
@@ -88,6 +88,11 @@ jobs:
           name: Build package
           command: yarn workspace @identemoji/core build
 
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - packages/core/dist
+
   build-default-theme:
     docker:
       - image: node:10.5
@@ -115,6 +120,11 @@ jobs:
       - run:
           name: Build package
           command: yarn workspace @identemoji/default-theme build
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - packages/default-theme/dist
 
   build-builder:
     docker:
@@ -195,11 +205,34 @@ jobs:
           name: Deploy content to gh-pages branch
           command: gh-pages --dist packages/builder/dist -m "Updates [ci skip]"
 
+  publish:
+    docker:
+      - image: node:10.5
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: ~/repo
+
+      - run:
+          name: Configure Yarn
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+
+      - run:
+          name: Publish packages
+          command: |
+            yarn workspace @identemoji/core publish
+            yarn workspace @identemoji/default-theme publish
+            yarn workspace @identemoji/react publish
+
 workflows:
   version: 2
   test-build-deploy:
     jobs:
-      # Lint
+      # Test
       - lint:
           filters:
             tags:
@@ -220,7 +253,19 @@ workflows:
               only: /.*/
 
       # Deploy
-      - verify-tag:
+      - preflight:
+          requires:
+            - lint
+            - build-core
+            - build-default-theme
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - publish:
+          requires:
+            - preflight
           filters:
             branches:
               ignore: /.*/
