@@ -157,7 +157,7 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - packages/react/dist
+            - packages/react/lib
 
   build-builder:
     docker:

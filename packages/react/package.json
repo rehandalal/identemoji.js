@@ -7,10 +7,10 @@
     "build": "babel ./src -d ./dist --copy-files"
   },
   "files": [
-    "src/index.js",
-    "dist/index.js"
+    "src",
+    "lib"
   ],
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "peerDependencies": {
     "@identemoji/core": "^0.1.4"
   },

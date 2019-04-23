@@ -4,14 +4,16 @@
   "description": "Beautiful, theme-able identicons.",
   "version": "0.1.4",
   "scripts": {
-    "build": "webpack --mode production --config ./webpack.config.js"
+    "build:webpack": "webpack --mode production --config ./webpack.config.js",
+    "build:babel": "babel ./src -d ./lib --copy-files",
+    "build": "yarn build:webpack; yarn build:babel"
   },
   "files": [
-    "src/index.js",
-    "src/utils.js",
-    "dist/identemoji-core.js"
+    "dist/identemoji-core.js",
+    "src",
+    "lib"
   ],
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "devDependencies": {},
   "dependencies": {
     "color-space": "1.16.0",
