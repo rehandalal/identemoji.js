@@ -149,8 +149,8 @@ jobs:
           at: ~/deploy
 
       - run:
-        name: List files
-        command: ls ~/deploy/packages/builder/dist
+          name: List files
+          command: ls ~/deploy/packages/builder/dist
 
   ghpages-deploy:
     docker:
@@ -200,7 +200,7 @@ jobs:
 
 workflows:
   version: 2
-  build:
+  test-build-deploy:
     jobs:
       # Lint
       - lint:
