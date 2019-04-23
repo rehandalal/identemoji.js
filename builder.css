@@ -7763,8 +7763,22 @@ html, body {
     .builder .theme-settings .raw-editor,
     .builder .theme-settings .interactive-editor {
       margin-top: 30px; }
-    .builder .theme-settings .color-settings {
+    .builder .theme-settings .settings-field {
       margin-bottom: 10px; }
+      .builder .theme-settings .settings-field .header {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px; }
+        .builder .theme-settings .settings-field .header > h6 {
+          align-items: center;
+          display: inline-flex;
+          flex-grow: 1;
+          margin: 0; }
+          .builder .theme-settings .settings-field .header > h6 .bp3-tag {
+            font-weight: normal;
+            margin-left: 10px; }
+        .builder .theme-settings .settings-field .header > .meta > * {
+          margin-left: 10px; }
 
 .color-block {
   background: #fff;
