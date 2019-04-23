@@ -126,7 +126,7 @@ jobs:
           paths:
             - packages/default-theme/dist
 
-  build-default-theme:
+  build-react:
     docker:
       - image: node:10.5
 
