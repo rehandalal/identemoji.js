@@ -8,7 +8,6 @@
     "start": "webpack-dev-server --mode development --config ./webpack.config.js"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-decorators": "7.4.0",
     "autobind-decorator": "2.4.0",
     "core-js": "2.6.5",
     "css-hot-loader": "1.4.4",

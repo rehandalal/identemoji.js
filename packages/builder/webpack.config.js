@@ -17,11 +17,22 @@ module.exports = (env, argv) => ({
             loader: "babel-loader",
             options: {
               presets: [
-                ["@babel/preset-env", { useBuiltIns: "usage", corejs: 2 }],
+                [
+                  "@babel/preset-env",
+                  {
+                    useBuiltIns: "usage",
+                    corejs: 2
+                  }
+                ],
                 "@babel/preset-react"
               ],
               plugins: [
-                ["@babel/plugin-proposal-decorators", { legacy: true }],
+                [
+                  "@babel/plugin-proposal-decorators",
+                  {
+                    legacy: true
+                  }
+                ],
                 "@babel/plugin-proposal-class-properties"
               ]
             }

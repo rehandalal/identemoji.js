@@ -126,6 +126,39 @@ jobs:
           paths:
             - packages/default-theme/dist
 
+  build-default-theme:
+    docker:
+      - image: node:10.5
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - yarn-packages-{{ checksum "yarn.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - yarn-packages-
+
+      - run:
+          name: Install node dependencies
+          command: yarn install
+
+      - save_cache:
+          paths:
+            - "node_modules"
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Build package
+          command: yarn workspace @identemoji/react build
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - packages/react/dist
+
   build-builder:
     docker:
       - image: node:10.5
@@ -222,10 +255,18 @@ jobs:
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
 
       - run:
-          name: Publish packages
+          name: Publish @identemoji/core
           command: |
             yarn workspace @identemoji/core publish --non-interactive --new-version ${CIRCLE_TAG#"v"} --access=public
+
+      - run:
+          name: Publish @identemoji/default-theme
+          command: |
             yarn workspace @identemoji/default-theme publish --non-interactive --new-version ${CIRCLE_TAG#"v"} --access=public
+
+      - run:
+          name: Publish @identemoji/react
+          command: |
             yarn workspace @identemoji/react publish --non-interactive --new-version ${CIRCLE_TAG#"v"} --access=public
 
 workflows:
@@ -247,6 +288,10 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - build-react:
+          filters:
+            tags:
+              only: /.*/
       - build-builder:
           filters:
             tags:
@@ -258,6 +303,7 @@ workflows:
             - lint
             - build-core
             - build-default-theme
+            - build-react
           filters:
             branches:
               ignore: /.*/
