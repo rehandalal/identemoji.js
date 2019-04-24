@@ -21,7 +21,7 @@ module.exports = (env, argv) => ({
                   "@babel/preset-env",
                   {
                     useBuiltIns: "usage",
-                    corejs: 2
+                    corejs: 3
                   }
                 ],
                 "@babel/preset-react"

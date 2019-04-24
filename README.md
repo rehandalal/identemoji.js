@@ -1,6 +1,7 @@
 Identemoji.js
 =============
 
+[![NPM](https://img.shields.io/npm/v/@identemoji/core.svg)](https://www.npmjs.com/org/identemoji)
 [![CircleCI](https://img.shields.io/circleci/project/github/rehandalal/identemoji.js/master.svg)](https://circleci.com/gh/rehandalal/identemoji.js/tree/master)
 
 Beautiful, theme-able identicons.
