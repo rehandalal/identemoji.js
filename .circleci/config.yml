@@ -169,6 +169,9 @@ jobs:
     steps:
       - checkout
 
+      - attach_workspace:
+          at: ~/repo
+
       - restore_cache:
           keys:
           - yarn-packages-{{ checksum "yarn.lock" }}
