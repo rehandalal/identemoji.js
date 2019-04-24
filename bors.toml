@@ -1,0 +1,12 @@
+status = [
+  "ci/circleci: lint",
+  "ci/circleci: build-core",
+  "ci/circleci: build-default-theme",
+  "ci/circleci: build-react",
+  "ci/circleci: build-builder"
+]
+# Avoid including verbose details from PR bodies
+cut_body_after = "\n---\n"
+block_labels = ["bors-dont-merge"]
+required_approvals = 1
+delete_merged_branches = true
