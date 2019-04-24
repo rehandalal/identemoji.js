@@ -4,7 +4,9 @@
   "description": "Default theme for Identemoji.",
   "version": "0.1.4",
   "scripts": {
-    "build": "webpack --mode production --config ./webpack.config.js"
+    "build:webpack": "webpack --mode production --config ./webpack.config.js",
+    "build:babel": "babel ./src/exports.js -d ./lib --copy-files",
+    "build": "yarn build:webpack; yarn build:babel"
   },
   "files": [
     "data",
@@ -14,7 +16,7 @@
     "dist/default-theme.min.json",
     "CREDITS.md"
   ],
-  "main": "src/index.js",
+  "main": "lib/exports.js",
   "peerDependencies": {},
   "devDependencies": {},
   "dependencies": {}
