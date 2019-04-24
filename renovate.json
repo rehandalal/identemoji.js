@@ -3,6 +3,7 @@
     "config:base"
   ],
   "ignorePresets": [
-    ":disableRateLimiting"
+    ":prHourlyLimit2",
+    ":prConcurrentLimit20"
   ]
 }
