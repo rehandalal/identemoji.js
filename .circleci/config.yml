@@ -294,6 +294,10 @@ workflows:
             tags:
               only: /.*/
       - build-builder:
+          requires:
+            - build-core
+            - build-default-theme
+            - build-react
           filters:
             tags:
               only: /.*/

@@ -12,10 +12,10 @@ import {
   RadioGroup,
   Tag
 } from "@blueprintjs/core";
-import IdentemojiCore from "@identemoji/core/src";
+import IdentemojiCore from "@identemoji/core";
 import { getHash } from "@identemoji/core/src/utils";
-import Identemoji from "@identemoji/react/src";
-import defaultTheme from "@identemoji/default-theme/src";
+import Identemoji from "@identemoji/react";
+import defaultTheme from "@identemoji/default-theme";
 import AceEditor from "react-ace";
 
 import ColorSettings from "./ColorSettings";
