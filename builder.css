@@ -4671,6 +4671,9 @@ span.bp3-icon:empty{
 .bp3-icon-layout-sorted-clusters::before{
   content:""; }
 
+.bp3-icon-learning::before{
+  content:""; }
+
 .bp3-icon-left-join::before{
   content:""; }
 
@@ -4781,6 +4784,12 @@ span.bp3-icon:empty{
 
 .bp3-icon-new-grid-item::before{
   content:""; }
+
+.bp3-icon-new-layer::before{
+  content:""; }
+
+.bp3-icon-new-layers::before{
+  content:""; }
 
 .bp3-icon-new-link::before{
   content:""; }
@@ -5114,6 +5123,9 @@ span.bp3-icon:empty{
 
 .bp3-icon-stop::before{
   content:""; }
+
+.bp3-icon-stopwatch::before{
+  content:""; }
 
 .bp3-icon-strikethrough::before{
   content:""; }
