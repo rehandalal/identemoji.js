@@ -19,7 +19,7 @@
     "webpack-dev-server": "3.8.2"
   },
   "dependencies": {
-    "@blueprintjs/core": "3.19.0",
+    "@blueprintjs/core": "3.19.1",
     "react": "16.10.2",
     "react-ace": "7.0.4",
     "react-color": "2.17.3",
