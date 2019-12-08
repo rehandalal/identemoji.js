@@ -870,10 +870,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@blueprintjs/core@3.22.0":
-  version "3.22.0"
-  resolved "https://registry.yarnpkg.com/@blueprintjs/core/-/core-3.22.0.tgz#6c7e7562a7e5fb7d2924ee3cd0832734eeb24470"
-  integrity sha512-CzKRY/ZmwmRPoybHFS4HI2GWuphMzIMuBQttaQi3OYQx28vyczKlmhlZPXhbX5pEn4RFajRJvMx086iuJXlnOw==
+"@blueprintjs/core@3.22.1":
+  version "3.22.1"
+  resolved "https://registry.yarnpkg.com/@blueprintjs/core/-/core-3.22.1.tgz#2fd1e985c46440f16dbe7136f563c4e833e2f34d"
+  integrity sha512-egM1jyE+O4X/HvgCDZ96DDvwIlC/z9J1vBVYgnZmeGHPhjCOnmc8bRqlifmPMTBwO6xl/1H67gCp/GEhyvu0EA==
   dependencies:
     "@blueprintjs/icons" "^3.12.0"
     "@types/dom4" "^2.0.1"
