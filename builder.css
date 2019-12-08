@@ -4052,6 +4052,9 @@ span.bp3-icon:empty{
 .bp3-icon-briefcase::before{
   content:""; }
 
+.bp3-icon-bring-data::before{
+  content:""; }
+
 .bp3-icon-build::before{
   content:""; }
 
@@ -5249,6 +5252,9 @@ span.bp3-icon:empty{
 .bp3-icon-torch::before{
   content:""; }
 
+.bp3-icon-tractor::before{
+  content:""; }
+
 .bp3-icon-train::before{
   content:""; }
 
@@ -5266,6 +5272,9 @@ span.bp3-icon:empty{
 
 .bp3-icon-trending-up::before{
   content:""; }
+
+.bp3-icon-truck::before{
+  content:""; }
 
 .bp3-icon-two-columns::before{
   content:""; }
