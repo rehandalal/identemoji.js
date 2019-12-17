@@ -2014,10 +2014,10 @@ css-hot-loader@1.4.4:
     lodash "^4.17.5"
     normalize-url "^1.9.1"
 
-css-loader@3.3.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-3.3.1.tgz#7e80ee995e96adbd8cc08cca9cfbd8109121f312"
-  integrity sha512-I2Sz5X81b2pJ4SM2UwxWcIu6uXcCvfCHgRHa1j0J8PmZj7qXu9ZkFdBeIwl6brZPseW982MrBoPfCfHqbkAUZw==
+css-loader@3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-3.4.0.tgz#9fb263436783117a41d014e45e8eaeba54dd6670"
+  integrity sha512-JornYo4RAXl1Mzt0lOSVPmArzAMV3rGY2VuwtaDc732WTWjdwTaeS19nCGWMcSCf305Q396lhhDAJEWWM0SgPQ==
   dependencies:
     camelcase "^5.3.1"
     cssesc "^3.0.0"
