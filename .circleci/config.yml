@@ -62,7 +62,7 @@ jobs:
 
   build-core:
     docker:
-      - image: node:10.18
+      - image: node:10.19
 
     working_directory: ~/repo
 
@@ -96,7 +96,7 @@ jobs:
 
   build-default-theme:
     docker:
-      - image: node:10.18
+      - image: node:10.19
 
     working_directory: ~/repo
 
@@ -130,7 +130,7 @@ jobs:
 
   build-react:
     docker:
-      - image: node:10.18
+      - image: node:10.19
 
     working_directory: ~/repo
 
@@ -163,7 +163,7 @@ jobs:
 
   build-builder:
     docker:
-      - image: node:10.18
+      - image: node:10.19
 
     working_directory: ~/repo
 
@@ -199,7 +199,7 @@ jobs:
 
   deploy-ghpages:
     docker:
-      - image: node:10.18
+      - image: node:10.19
 
     working_directory: ~/repo
 
@@ -245,7 +245,7 @@ jobs:
 
   publish:
     docker:
-      - image: node:10.18
+      - image: node:10.19
 
     working_directory: ~/repo
 
