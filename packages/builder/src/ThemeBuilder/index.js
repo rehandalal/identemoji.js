@@ -29,7 +29,7 @@ class ThemeBuilder extends React.Component {
       editMode: "interactive",
       seed: "Identemoji",
       size: 192,
-      theme: defaultTheme,
+      theme: JSON.stringify(defaultTheme, null, 4),
     };
   }
 
@@ -71,44 +71,64 @@ class ThemeBuilder extends React.Component {
   }
 
   handleRawThemeChange(theme) {
-    this.setState({ theme: JSON.parse(theme) });
+    this.setState({ theme });
   }
 
   handleResetThemeClick() {
-    this.setState({ theme: defaultTheme });
+    this.setState({ theme: JSON.stringify(defaultTheme, null, 4) });
   }
 
   handleColorUpdate(colors) {
+    const themeData = JSON.parse(this.state.theme);
+
     this.setState({
-      theme: {
-        ...this.state.theme,
-        colors,
-      },
+      theme: JSON.stringify(
+        {
+          ...themeData,
+          colors,
+        },
+        null,
+        4
+      ),
     });
   }
 
   handleEmojiDeleteClick(index) {
-    const { theme } = this.state;
+    const themeData = JSON.parse(this.state.theme);
 
     this.setState({
-      theme: {
-        ...theme,
-        emojis: [
-          ...theme.emojis.slice(0, index),
-          ...theme.emojis.slice(index + 1),
-        ],
-      },
+      theme: JSON.stringify(
+        {
+          ...themeData,
+          emojis: [
+            ...themeData.emojis.slice(0, index),
+            ...themeData.emojis.slice(index + 1),
+          ],
+        },
+        null,
+        4
+      ),
     });
   }
 
   renderIdenticonSettings() {
+    let theme = {
+      colors: [],
+      emojis: [],
+    };
+    try {
+      theme = JSON.parse(this.state.theme);
+    } catch {
+      // Do nothing
+    }
+
     return (
       <div className="identicon-settings">
         <div className="preview">
           <Identemoji
             seed={this.state.seed}
             size={this.state.size * 2}
-            theme={this.state.theme}
+            theme={theme}
             className="identemoji"
             style={{
               width: this.state.size,
@@ -151,7 +171,7 @@ class ThemeBuilder extends React.Component {
   }
 
   renderInteractiveThemeSettings() {
-    const { theme } = this.state;
+    const theme = JSON.parse(this.state.theme);
     return (
       <div className="interactive-editor">
         <ColorSettings
@@ -188,7 +208,7 @@ class ThemeBuilder extends React.Component {
           fontSize={12}
           height="26rem"
           width="100%"
-          value={JSON.stringify(this.state.theme, null, 4)}
+          value={this.state.theme}
           onChange={this.handleRawThemeChange}
           highlightActiveLine
         />
