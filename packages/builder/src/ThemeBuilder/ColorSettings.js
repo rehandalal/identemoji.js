@@ -10,7 +10,7 @@ import ColorBlock from "./ColorBlock";
 class ColorSettings extends React.Component {
   static propTypes = {
     colors: PropTypes.array.isRequired,
-    onUpdate: PropTypes.func
+    onUpdate: PropTypes.func,
   };
 
   handleDelete(index) {

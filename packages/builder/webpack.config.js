@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env, argv) => ({
   entry: {
-    builder: __dirname + "/src/index.js"
+    builder: __dirname + "/src/index.js",
   },
   module: {
     rules: [
@@ -21,23 +21,23 @@ module.exports = (env, argv) => ({
                   "@babel/preset-env",
                   {
                     useBuiltIns: "usage",
-                    corejs: 3
-                  }
+                    corejs: 3,
+                  },
                 ],
-                "@babel/preset-react"
+                "@babel/preset-react",
               ],
               plugins: [
                 [
                   "@babel/plugin-proposal-decorators",
                   {
-                    legacy: true
-                  }
+                    legacy: true,
+                  },
                 ],
-                "@babel/plugin-proposal-class-properties"
-              ]
-            }
-          }
-        ]
+                "@babel/plugin-proposal-class-properties",
+              ],
+            },
+          },
+        ],
       },
       {
         test: /\.s?css$/,
@@ -45,29 +45,29 @@ module.exports = (env, argv) => ({
           "css-hot-loader",
           { loader: MiniCssExtractPlugin.loader },
           "css-loader",
-          "sass-loader"
-        ]
+          "sass-loader",
+        ],
       },
       {
         test: /\.svg$/,
-        use: ["raw-loader"]
-      }
-    ]
+        use: ["raw-loader"],
+      },
+    ],
   },
   output: {
     path: __dirname + "/dist",
     publicPath: argv.mode === "production" ? "./" : "/",
-    filename: "[name].js"
+    filename: "[name].js",
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
-      filename: "[name].css"
+      filename: "[name].css",
     }),
     new HtmlWebpackPlugin({
       template: __dirname + "/public/index.html",
-      inject: "body"
-    })
+      inject: "body",
+    }),
   ],
   devServer: {
     contentBase: __dirname + "/dist",
@@ -75,6 +75,6 @@ module.exports = (env, argv) => ({
     hot: true,
     port: 3000,
     host: "0.0.0.0",
-    historyApiFallback: true
-  }
+    historyApiFallback: true,
+  },
 });

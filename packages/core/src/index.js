@@ -9,7 +9,7 @@ export default class Identemoji {
     this.theme = {
       layouts: [...Array(10).keys()],
       minimumColorVariance: 0,
-      ...theme
+      ...theme,
     };
 
     // Set up the canvas
@@ -157,9 +157,9 @@ export default class Identemoji {
     const { emojis } = this.theme;
     const emoji = emojis[parseInt(hash.substring(2, 5), 16) % emojis.length];
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const img = new Image();
-      img.onload = function() {
+      img.onload = function () {
         ctx.shadowColor = "rgba(0, 0, 0, 0.25)";
         ctx.shadowBlur = size / 8;
         ctx.shadowOffsetX = 0;

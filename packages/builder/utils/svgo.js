@@ -58,7 +58,7 @@ const svgo = new SVGO({
       addDimensions: {
         type: "perItem",
         description: "Adds in the width and height dimensions.",
-        fn: function(item) {
+        fn: function (item) {
           if (item.isElem("svg") && item.hasAttr("viewBox")) {
             const nums = item.attr("viewBox").value.split(/[ ,]+/g);
 
@@ -73,7 +73,7 @@ const svgo = new SVGO({
               name: "width",
               value: width + "px",
               prefix: "",
-              local: "width"
+              local: "width",
             });
 
             if (item.hasAttr("height")) {
@@ -84,13 +84,13 @@ const svgo = new SVGO({
               name: "height",
               value: height + "px",
               prefix: "",
-              local: "height"
+              local: "height",
             });
           }
-        }
-      }
-    }
-  ]
+        },
+      },
+    },
+  ],
 });
 
 const files = process.argv.slice(2);
@@ -98,15 +98,15 @@ const files = process.argv.slice(2);
 function optimize(file) {
   const fp = path.join(process.cwd(), file);
 
-  fs.readFile(fp, "utf8", async function(err, data) {
+  fs.readFile(fp, "utf8", async function (err, data) {
     if (err) {
       throw err;
     }
 
     // Do six passes for multipass optimizations
     for (let p = 0; p < 6; p++) {
-      await svgo.optimize(data, { path: fp }).then(function(output) {
-        fs.writeFile(fp, output.data, function() {});
+      await svgo.optimize(data, { path: fp }).then(function (output) {
+        fs.writeFile(fp, output.data, function () {});
       });
     }
   });

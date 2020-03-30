@@ -9,7 +9,7 @@ class SVGBlock extends React.Component {
   static propTypes = {
     index: PropTypes.number.isRequired,
     onDelete: PropTypes.func,
-    svg: PropTypes.string.isRequired
+    svg: PropTypes.string.isRequired,
   };
 
   handleDeleteClick() {

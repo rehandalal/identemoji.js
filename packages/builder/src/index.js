@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import brace from "brace";
-import "brace/mode/json";
-import "brace/theme/crimson_editor";
+// Import for side effects
+import AceEditor from "react-ace";
+import "ace-builds/src-noconflict/mode-json";
+import "ace-builds/src-noconflict/theme-crimson_editor";
 
 import { FocusStyleManager } from "@blueprintjs/core";
 

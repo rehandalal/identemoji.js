@@ -10,7 +10,7 @@ class ColorBlock extends React.Component {
   static propTypes = {
     color: PropTypes.string.isRequired,
     onChange: PropTypes.func,
-    onDelete: PropTypes.func
+    onDelete: PropTypes.func,
   };
 
   handleDeleteClick() {
@@ -52,14 +52,14 @@ class ColorBlock extends React.Component {
         <div
           className="swatch"
           style={{
-            backgroundColor: color || "transparent"
+            backgroundColor: color || "transparent",
           }}
           onClick={this.handleClick}
         />
         <ColorPicker
           color={color}
           onChange={this.handleChange}
-          ref={el => {
+          ref={(el) => {
             this.picker = el;
           }}
         />

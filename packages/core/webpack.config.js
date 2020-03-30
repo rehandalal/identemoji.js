@@ -2,21 +2,21 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: {
-    core: __dirname + "/src/index.js"
+    core: __dirname + "/src/index.js",
   },
   module: {
     rules: [
       {
         test: /\.(js)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"]
-      }
-    ]
+        use: ["babel-loader"],
+      },
+    ],
   },
   output: {
     path: __dirname + "/dist",
     publicPath: "/",
     filename: "identemoji-core.js",
-    library: "Identemoji"
-  }
+    library: "Identemoji",
+  },
 };

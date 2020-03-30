@@ -14,7 +14,7 @@ export async function getHash(message) {
   const buffer = await window.crypto.subtle.digest("SHA-1", data);
   const byteArray = new Uint8Array(buffer);
 
-  const hexCodes = [...byteArray].map(value => {
+  const hexCodes = [...byteArray].map((value) => {
     const hexCode = value.toString(16);
     const paddedHexCode = hexCode.padStart(2, "0");
     return paddedHexCode;
@@ -37,13 +37,13 @@ export function hex2RGB(hex) {
     return [
       parseInt(v.substring(0, 1).repeat(2), 16),
       parseInt(v.substring(1, 2).repeat(2), 16),
-      parseInt(v.substring(2, 3).repeat(2), 16)
+      parseInt(v.substring(2, 3).repeat(2), 16),
     ];
   }
   return [
     parseInt(v.substring(0, 2), 16),
     parseInt(v.substring(2, 4), 16),
-    parseInt(v.substring(4, 6), 16)
+    parseInt(v.substring(4, 6), 16),
   ];
 }
 
