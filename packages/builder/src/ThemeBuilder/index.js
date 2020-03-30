@@ -10,7 +10,7 @@ import {
   Label,
   Radio,
   RadioGroup,
-  Tag
+  Tag,
 } from "@blueprintjs/core";
 import IdentemojiCore from "@identemoji/core";
 import { getHash } from "@identemoji/core/src/utils";
@@ -29,19 +29,19 @@ class ThemeBuilder extends React.Component {
       editMode: "interactive",
       seed: "Identemoji",
       size: 192,
-      theme: defaultTheme
+      theme: defaultTheme,
     };
   }
 
   async handleSeedChange(ev) {
     this.setState({
-      seed: ev.target.value
+      seed: ev.target.value,
     });
   }
 
   handleSizeChange(ev) {
     this.setState({
-      size: parseInt(ev.target.value, 10)
+      size: parseInt(ev.target.value, 10),
     });
   }
 
@@ -82,8 +82,8 @@ class ThemeBuilder extends React.Component {
     this.setState({
       theme: {
         ...this.state.theme,
-        colors
-      }
+        colors,
+      },
     });
   }
 
@@ -95,9 +95,9 @@ class ThemeBuilder extends React.Component {
         ...theme,
         emojis: [
           ...theme.emojis.slice(0, index),
-          ...theme.emojis.slice(index + 1)
-        ]
-      }
+          ...theme.emojis.slice(index + 1),
+        ],
+      },
     });
   }
 
@@ -111,7 +111,7 @@ class ThemeBuilder extends React.Component {
             theme={this.state.theme}
             className="identemoji"
             style={{
-              width: this.state.size
+              width: this.state.size,
             }}
             onLoad={this.handleIdentemojiLoad}
           />

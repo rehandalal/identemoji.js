@@ -9,7 +9,7 @@ import { ChromePicker } from "react-color";
 class ColorPicker extends React.Component {
   static propTypes = {
     color: PropTypes.string,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
   };
 
   constructor(props) {
@@ -17,7 +17,7 @@ class ColorPicker extends React.Component {
     this.state = {
       visible: false,
       x: 0,
-      y: 0
+      y: 0,
     };
   }
 
@@ -25,13 +25,13 @@ class ColorPicker extends React.Component {
     this.setState({
       visible: true,
       x,
-      y
+      y,
     });
   }
 
   hide() {
     this.setState({
-      visible: false
+      visible: false,
     });
   }
 
@@ -65,9 +65,9 @@ class ColorPicker extends React.Component {
         className="color-picker"
         style={{
           left: x,
-          top: y
+          top: y,
         }}
-        ref={node => {
+        ref={(node) => {
           this.node = node;
         }}
         onClick={this.handleClick}

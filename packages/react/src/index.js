@@ -10,18 +10,18 @@ export default class IdentemojiComponent extends React.Component {
     size: PropTypes.number,
     theme: PropTypes.shape({
       colors: PropTypes.arrayOf(PropTypes.string).isRequired,
-      emojis: PropTypes.arrayOf(PropTypes.string).isRequired
-    }).isRequired
+      emojis: PropTypes.arrayOf(PropTypes.string).isRequired,
+    }).isRequired,
   };
 
   static defaultProps = {
-    size: 96
+    size: 96,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      identemoji: null
+      identemoji: null,
     };
   }
 

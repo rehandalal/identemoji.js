@@ -2,12 +2,12 @@ import colors from "../data/colors.json";
 
 const theme = {
   colors,
-  emojis: []
+  emojis: [],
 };
 
 // Import all the SVG files and populate emojis array
 function requireAll(r) {
-  r.keys().forEach(k => {
+  r.keys().forEach((k) => {
     theme.emojis.push(r(k)["default"]);
   });
 }
