@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "autobind-decorator": "2.4.0",
-    "core-js": "3.6.4",
+    "core-js": "3.6.5",
     "css-hot-loader": "1.4.4",
     "css-loader": "3.4.2",
     "html-webpack-plugin": "4.0.3",
