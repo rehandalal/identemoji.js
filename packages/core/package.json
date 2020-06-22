@@ -17,7 +17,7 @@
   "devDependencies": {},
   "dependencies": {
     "color-space": "1.16.0",
-    "delta-e": "0.0.7",
+    "delta-e": "0.0.8",
     "mini-svg-data-uri": "1.2.3"
   }
 }

@@ -2422,10 +2422,10 @@ delegates@^1.0.0:
   resolved "https://registry.yarnpkg.com/delegates/-/delegates-1.0.0.tgz#84c6e159b81904fdca59a0ef44cd870d31250f9a"
   integrity sha1-hMbhWbgZBP3KWaDvRM2HDTElD5o=
 
-delta-e@0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/delta-e/-/delta-e-0.0.7.tgz#92123877a86f01c799767402a8593138e910c081"
-  integrity sha1-khI4d6hvAceZdnQCqFkxOOkQwIE=
+delta-e@0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/delta-e/-/delta-e-0.0.8.tgz#ad2097846fb5d3f1d8aa4668005adabc8c7cffb9"
+  integrity sha512-xIggbz7AoZLjwyV+BatfsKhWB1ejeh6vabM4KTJ2e7/d+TS0f7s87aUfkJ7B+MfniM6DD5VOWWlqcKXksp5mIg==
 
 depd@~1.1.2:
   version "1.1.2"
