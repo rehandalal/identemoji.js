@@ -5304,10 +5304,10 @@ raw-loader@4.0.1:
     loader-utils "^2.0.0"
     schema-utils "^2.6.5"
 
-react-ace@9.1.1:
-  version "9.1.1"
-  resolved "https://registry.yarnpkg.com/react-ace/-/react-ace-9.1.1.tgz#fe27e1c668b0186dc1609c422198d1c2df34d2bf"
-  integrity sha512-dL0w6GwtnS1opsOoWhJaF7rF7xCM+NOEOfePmDfiaeU+EyZQ6nRWDBgyzKsuiB3hyXH3G9D6FX37ur/LKUdKjA==
+react-ace@9.1.4:
+  version "9.1.4"
+  resolved "https://registry.yarnpkg.com/react-ace/-/react-ace-9.1.4.tgz#7c45c361aa5fe1efa3313fa876bce30aa64a244f"
+  integrity sha512-4DBWvElbVR3WhsA2HhQ524K9Yoa/J/sjuBV9NUZ+yar3Q4BGJRTnhY6pM0INffH1IkBZHKIOyz34XHjc7RNTpw==
   dependencies:
     ace-builds "^1.4.6"
     diff-match-patch "^1.0.4"
