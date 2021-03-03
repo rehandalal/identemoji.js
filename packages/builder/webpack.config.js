@@ -68,6 +68,10 @@ module.exports = (env, argv) => ({
       template: __dirname + "/public/index.html",
       inject: "body",
     }),
+    // Fix for blueprint on webpack 5
+    new webpack.DefinePlugin({
+      "process.env": "{}",
+    }),
   ],
   devServer: {
     contentBase: __dirname + "/dist",
