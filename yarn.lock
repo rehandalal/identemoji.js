@@ -1354,10 +1354,10 @@ accepts@~1.3.4, accepts@~1.3.5, accepts@~1.3.7:
     mime-types "~2.1.24"
     negotiator "0.6.2"
 
-ace-builds@^1.4.6:
-  version "1.4.8"
-  resolved "https://registry.yarnpkg.com/ace-builds/-/ace-builds-1.4.8.tgz#d14be41d30294a2a12581f0bcfee4b696481ffdd"
-  integrity sha512-8ZVAxwyCGAxQX8mOp9imSXH0hoSPkGfy8igJy+WO/7axL30saRhKgg1XPACSmxxPA7nfHVwM+ShWXT+vKsNuFg==
+ace-builds@^1.4.12:
+  version "1.4.12"
+  resolved "https://registry.yarnpkg.com/ace-builds/-/ace-builds-1.4.12.tgz#888efa386e36f4345f40b5233fcc4fe4c588fae7"
+  integrity sha512-G+chJctFPiiLGvs3+/Mly3apXTcfgE45dT5yp12BcWZ1kUs+gm0qd3/fv4gsz6fVag4mM0moHVpjHDIgph6Psg==
 
 acorn-jsx@^5.2.0:
   version "5.2.0"
@@ -2406,10 +2406,10 @@ detect-node@^2.0.4:
   resolved "https://registry.yarnpkg.com/detect-node/-/detect-node-2.0.4.tgz#014ee8f8f669c5c58023da64b8179c083a28c46c"
   integrity sha512-ZIzRpLJrOj7jjP2miAtgqIfmzbxa4ZOr5jJc601zklsfEx9oTzmmj2nVpIPRpNlRTIh8lc1kyViIY7BWSGNmKw==
 
-diff-match-patch@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/diff-match-patch/-/diff-match-patch-1.0.4.tgz#6ac4b55237463761c4daf0dc603eb869124744b1"
-  integrity sha512-Uv3SW8bmH9nAtHKaKSanOQmj2DnlH65fUpcrMdfdaOxUG02QQ4YGZ8AE7kKOMisF7UqvOlGKVYWRvezdncW9lg==
+diff-match-patch@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/diff-match-patch/-/diff-match-patch-1.0.5.tgz#abb584d5f10cd1196dfc55aa03701592ae3f7b37"
+  integrity sha512-IayShXAgj/QMXgB0IWmKx+rOPuGMhqm5w6jvFxmVenXKIzRqTAAsbBPT3kWQeGANj3jGgvcvv4yK6SxqYmikgw==
 
 dns-equal@^1.0.0:
   version "1.0.0"
@@ -5094,13 +5094,13 @@ raw-loader@4.0.2:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
 
-react-ace@9.3.0:
-  version "9.3.0"
-  resolved "https://registry.yarnpkg.com/react-ace/-/react-ace-9.3.0.tgz#9643fdd30026e2d7b5202536962c48c4d94de279"
-  integrity sha512-RWPDwVobLvyD0wDoHHQqEnn9pNQBhMnmo6LmRACkaXxAg3UQZpse6x9JFLC5EXyWby+P3uolIlQPct4NFEBPNg==
+react-ace@9.4.3:
+  version "9.4.3"
+  resolved "https://registry.yarnpkg.com/react-ace/-/react-ace-9.4.3.tgz#4534f4bbbfba4bdc723c8b0cd33e7d876f8d78ed"
+  integrity sha512-WKknvcOZLhMtTSicRll94SjfZe6XEvZO6OpjJQCUGDcygZwfopkizeVntHX2ldMystbcmVES1RrjXUmyw0+wfQ==
   dependencies:
-    ace-builds "^1.4.6"
-    diff-match-patch "^1.0.4"
+    ace-builds "^1.4.12"
+    diff-match-patch "^1.0.5"
     lodash.get "^4.4.2"
     lodash.isequal "^4.5.0"
     prop-types "^15.7.2"
