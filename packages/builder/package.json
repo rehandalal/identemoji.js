@@ -21,7 +21,7 @@
   "dependencies": {
     "@blueprintjs/core": "3.39.0",
     "react": "17.0.1",
-    "react-ace": "9.3.0",
+    "react-ace": "9.5.0",
     "react-color": "2.19.3",
     "react-dom": "17.0.1"
   }
